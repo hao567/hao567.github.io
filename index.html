@@ -1,42 +1,43 @@
 <!DOCTYPE html>
 
-	<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="baidu-site-verification" content="XhxLn5rr0E" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="Keywords" content="程序员小站, 程序员网址导航,编程网站" />
-		<!--请不要拿走或者抄袭我们的创意,如果你需要，,我们可以把这个小站卖给你,如果想借鉴，请付点咨询费<link rel="stylesheet" href="./include/jquery.mobile-1.4.5.min.css" />
-		<script src="./include/jquery-1.8.3.min.js"></script>
-		<script src="./include/jquery.mobile-1.4.5.min.js"></script>
-		<script src="./include/bmob-min.js"></script>-->
-		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-		<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-		<script src="http://gisdaodao.github.io/itsites/bmob-min.js"></script>
-
-
-
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="baidu-site-verification" content="XhxLn5rr0E" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="Keywords" content="全站, 网址导航,网站大全" />
+    <!--请不要拿走或者抄袭我们的创意,如果你需要，,我们可以把这个小站卖给你,如果想借鉴，请付点咨询费<link rel="stylesheet" href="./include/jquery.mobile-1.4.5.min.css" />
+    <script src="./include/jquery-1.8.3.min.js"></script>
+    <script src="./include/jquery.mobile-1.4.5.min.js"></script>
+    <script src="./include/bmob-min.js"></script>-->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="http://gisdaodao.github.io/itsites/bmob-min.js"></script>
     <style>
+        div.search {
+        }
 
-div.search{
-}
-div.search img,div.search div.text,div.search input.but{
-}
-div.search div.text{
-}
-div.search div.text input{
-}
-div.search div#auto{
-	z-index:1;
-	position:absolute;
-	background-color:#FFFFFF;
-	display:none;
-	border:1px #74c0f9 solid;
-}
-div.search input.but{
-	border:1px #74c0f9 solid;
-}
+            div.search img, div.search div.text, div.search input.but {
+            }
+
+            div.search div.text {
+            }
+
+                div.search div.text input {
+                }
+
+            div.search div#auto {
+                z-index: 1;
+                position: absolute;
+                background-color: #FFFFFF;
+                display: none;
+                border: 1px #74c0f9 solid;
+            }
+
+            div.search input.but {
+                border: 1px #74c0f9 solid;
+            }
     </style>
     <script>
         var changeStr = '';   //初始化一个
@@ -82,7 +83,7 @@ function FillUrls() {
     }
     //跟上次请求的关键字相同就返回
     //    if (changeStr == strdomin)
-    //        return;  
+    //        return;
 
     changeStr = strdomin;
     window.status = "请求中";
@@ -256,14 +257,14 @@ $(function () {
         }
     }
 });
-</script>
+    </script>
 
 
 
-		<script>
+    <script>
 			var bmobTool=(function(){
-				Bmob.initialize("39dfc34280e39b5411c3e450466da0f2", "4b59ff42a72875986c89551344a2b218");
-				var info=Bmob.Object.extend("test");
+				Bmob.initialize("1f570053c58338812a8970abbbaaa623", "d803ea3828a42eba94ecbc9ea47d435a");
+				var info=Bmob.Object.extend("siteslist");
 			        var articleinfo=Bmob.Object.extend("articlelisttable");
 			         var userarticleorsite=Bmob.Object.extend("userarticleorsite");
 				var o={};
@@ -395,7 +396,7 @@ if (currentUser) {
 					data.keyword=[];
 					for(i in tmpkey)if(i!="")data.keyword.push(i);
 					tmpkey=null;
-					data.type=$("input[type='radio'][name='add-type']:checked").val()||""; 
+					data.type=$("input[type='radio'][name='add-type']:checked").val()||"";
 					data.author=$("#add-author").val();
 					data.email=$("#add-email").val();
 					//分享网站
@@ -428,19 +429,19 @@ if (currentUser) {
 					var articledata={};
 					articledata.articletitle=$("#add-articlename").val();
 					articledata.articleurl="http://"+$("#add-articleurl").val().replace(/.*\/\//,"");
-				
-					articledata.codelanguage=$("input[type='radio'][name='favoritecolor']:checked").val()||""; 
+
+					articledata.codelanguage=$("input[type='radio'][name='favoritecolor']:checked").val()||"";
 				tmpkey=[];
 					articledata.articletype=[];
 				$("input[type='checkbox'][name='add-articlekeyword']:checked").each(function(){tmpkey[this.value.replace(/\s/g,"")]=1;});
 				for(j in tmpkey)if(j!="")articledata.articletype.push(j);
-			
-				
+
+
 				keyword=[];
 				articledata.keyword=[];
 					$($("input[type='text'][name='add-articlekeyword']").val().replace(/\s/g,"").split(",")).each(function(k,v){keyword[v]=1;});
 					for(i in keyword)if(i!="")articledata.keyword.push(i);
-				
+
 					tmpkey=null;
 					keyword=null;
 					//分享文章
@@ -464,12 +465,12 @@ if (currentUser) {
 } else {
     // show the signup or login page
 }
-				      
+
 				}
 				o.queryshareandfavorator=function(str)
 				{
 					var query = new Bmob.Query(userarticleorsite);
-query.equalTo("userid", str); 
+query.equalTo("userid", str);
 // 查询所有数据
 query.find({
     success: function(results) {
@@ -505,7 +506,7 @@ query.find({
     }
 });
 				}
-				
+
 				o.findweb=function(){
 					//设定网站限制
 					var findquery = new Bmob.Query(info)
@@ -585,7 +586,7 @@ query.find({
 					});
 					$.mobile.changePage("#articlelit");
 				};
-			
+
 				var buildArticleItem=function(object){
 					var tmpli,tmpa,dom1,dom2;
 					tmpli=document.createElement("li");
@@ -664,175 +665,174 @@ if (currentUser) {
 				}
 				return o;
 			})()
-		</script>
-		<title>程序员小站</title>
-	</head>
-	<body>
-		
-<!--首页-->
+    </script>
+    <title>程序员小站</title>
+</head>
+<body>
 
-        <div data-role="page" id="frequentlyuusedsites">
-            <div data-role="header" data-position="fixed"  >
-				<h1>程序员小站</h1>
-				<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
-				<a href="#add" data-role="button" data-icon="plus" >分享网站</a>
-				<a href="#addarticle"   data-icon="plus"  data-role="button" >分享文章</a>
-				<a href="#registerpage" data-role="button"  data-icon="forward" >注册</a>
-				<a href="#loginpage" data-role="button"  data-icon="star" >登陆</a>
-				</div>
-			</div>
-              <div data-role="content">
-              	<div class="ui-grid-solo">
-  <div class="ui-block-a">  <input style="min-width:300px;"  type="text" name="wd" id="Text1" autocomplete="off"  /></div>
-</div>
-                  <div class="ui-grid-g" style="border:0px; width: 100%; text-align: center;" >
-                    
-                      <div class="ui-block-a" style="border: 0px;float:none;display:inline-block;">  <input type="submit" onclick="baidu()" value="百度"></div>
-     <div class="ui-block-b" style="border: 0px;float:none;display:inline-block;">  <input type="submit"  onclick="sougou()"  value="搜狗"></div>
-     <div class="ui-block-c" style="border: 0px;float:none;display:inline-block; ">  <input type="submit"  onclick="bing()"  value="bing"></div>
-     <div class="ui-block-d" style="border: 0px;float:none;display:inline-block; ">  <input type="submit"  onclick="google()"  value="google"></div>
-   <div class="ui-block-d" style="border: 0px;float:none;display:inline-block; ">  <input type="submit"  onclick="googlechina()"  value="google中国"></div>
-      <div class="ui-block-d" style="border: 0px;float:none;display:inline-block; ">  <input type="submit"  onclick="three360()"  value="360"></div>
+    <!--首页-->
 
-     </div><div style="clear:both"></div><br>
-                        <ul data-role="listview">
-                            <li><a href="http://163.com/">网易</a></li>
-                            <li><a href="http://qq.com/">qq</a></li>
-                            <li><a href="http://www.ifeng.com//">凤凰网</a></li>
-                             <li><a href="http://wap.ithome.com/">ithome</a></li>
-                            <li><a href="http://m.cnblogs.com/">博客园</a></li>
-                            <li><a href="http://m.csdn.net/">csdn</a></li>
-                            <li><a href="http://m.oschina.net/">开源中国</a></li>
-                            <li><a href="http://www.chinaunix.net/">chinaunix</a></li>
-                            <li><a href="http://www.infoq.com/cn/">infoq</a></li>                                                          
-                            <li><a href="http://www.lupaworld.com/portal.php">lupaworld</a></li>
-                            <li><a href="http://51cto.com/">51cto</a></li>
-                            <li><a href="http://www.tuicool.com/ah">推酷</a></li>                                                          
-                            <li><a href="http://api.jquery.com/category/version/1.9/">jquery api</a></li>
-                            <li><a href="http://stackoverflow.com/">stackoverflow</a></li>
-                            <li><a href="http://news.html5cn.org/">html5cn</a></li>
-                            <li><a href="http://www.apkbus.com/news1/eyes/">apkbus news</a></li>
-                            <li><a href="https://github.com/blog/category/all">github blog</a></li>
-                            <li><a href="http://api.jquery.com/category/version/1.9/">jquery api</a></li>                           
-                        </ul>           
-                    </div>
-            
-			<div data-role="footer" data-position="fixed" >
-				<div data-role="navbar">
-					<ul>
-                        <li><a href="#frequentlyuusedsites" data-icon="home" >常用</a></li>
-                         <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
-						<li><a href="#home" data-icon="home" >网站</a></li>
-						<li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
-                           
-                      	<li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
-					</ul>
-				</div>
-			</div>
+    <div data-role="page" id="frequentlyuusedsites">
+        <div data-role="header" data-position="fixed">
+            <h1>程序员小站</h1>
+            <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+                <a href="#add" data-role="button" data-icon="plus">分享网站</a>
+                <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
+                <a href="#registerpage" data-role="button" data-icon="forward">注册</a>
+                <a href="#loginpage" data-role="button" data-icon="star">登陆</a>
+            </div>
         </div>
-		<div data-role="page" id="home" >
-			<div data-role="header" data-position="fixed"  >
-				<h1>程序员小站</h1>
-					<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
-				<a href="#add" data-role="button" data-icon="plus" >分享网站</a>
-				<a href="#addarticle"   data-icon="plus"  data-role="button" >分享文章</a>
-				<a href="#registerpage" data-role="button"  data-icon="forward" >注册</a>
-				<a href="#loginpage" data-role="button"  data-icon="star" >登陆</a>
-					
-				</div>
-			
-			</div>
+        <div data-role="content">
+            <div class="ui-grid-solo">
+                <div class="ui-block-a">  <input style="min-width:300px;" type="text" name="wd" id="Text1" autocomplete="off" /></div>
+            </div>
+            <div class="ui-grid-g" style="border:0px; width: 100%; text-align: center;">
 
-                 
-			<div data-role="content">
-   
-			<div class="ui-grid-solo">
-  <div class="ui-block-a">  <input style="min-width:300px;"  type="text" name="wd" id="Text1" autocomplete="off"  /></div>
-</div>
-                  <div class="ui-grid-e" style="border:0px; width: 100%; text-align: center;" >
-                    
-                      <div class="ui-block-a" style="border: 0px;float:none;display:inline-block;">  <input type="submit" onclick="baidu()" value="百度"></div>
-     <div class="ui-block-b" style="border: 0px;float:none;display:inline-block;">  <input type="submit"  onclick="sougou()"  value="搜狗"></div>
-     <div class="ui-block-c" style="border: 0px;float:none;display:inline-block; ">  <input type="submit"  onclick="bing()"  value="bing"></div>
-     <div class="ui-block-d" style="border: 0px;float:none;display:inline-block; ">  <input type="submit"  onclick="google()"  value="google"></div>
-   <div class="ui-block-d" style="border: 0px;float:none;display:inline-block; ">  <input type="submit"  onclick="googlechina()"  value="google中国"></div>
-      <div class="ui-block-d" style="border: 0px;float:none;display:inline-block; ">  <input type="submit"  onclick="three360()"  value="360"></div>
-     </div><div style="clear:both"></div><br>
-               
-                 
-              
-				<ul data-role="listview" data-inset="true" id="homeInfo"></ul>
-				
-				<div data-role="collapsible" data-collapsed="false" >
-					<h4>最新</h4>
-					<ul data-role="listview" data-inset="false" id="homeList">
-					</ul>
-				</div>
-				<button id="moreweb">更多站点</button>
-			</div>
+                <div class="ui-block-a" style="border: 0px;float:none;display:inline-block;">  <input type="submit" onclick="baidu()" value="百度"></div>
+                <div class="ui-block-b" style="border: 0px;float:none;display:inline-block;">  <input type="submit" onclick="sougou()" value="搜狗"></div>
+                <div class="ui-block-c" style="border: 0px;float:none;display:inline-block; ">  <input type="submit" onclick="bing()" value="bing"></div>
+                <div class="ui-block-d" style="border: 0px;float:none;display:inline-block; ">  <input type="submit" onclick="google()" value="google"></div>
+                <div class="ui-block-d" style="border: 0px;float:none;display:inline-block; ">  <input type="submit" onclick="googlechina()" value="google中国"></div>
+                <div class="ui-block-d" style="border: 0px;float:none;display:inline-block; ">  <input type="submit" onclick="three360()" value="360"></div>
 
-		<div data-role="footer" data-position="fixed" >
-				<div data-role="navbar">
-					<ul>
-                        <li><a href="#frequentlyuusedsites" data-icon="home" >常用</a></li>
-                         <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
-						<li><a href="#home" data-icon="home" >网站</a></li>
-						<li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
-                           
-                      	<li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
-					</ul>
-				</div>
-			</div>
-		</div> 
-		<script>
+            </div><div style="clear:both"></div><br>
+            <ul data-role="listview">
+                <li><a href="http://163.com/">网易</a></li>
+                <li><a href="http://qq.com/">qq</a></li>
+                <li><a href="http://www.ifeng.com//">凤凰网</a></li>
+                <li><a href="http://wap.ithome.com/">ithome</a></li>
+                <li><a href="http://m.cnblogs.com/">博客园</a></li>
+                <li><a href="http://m.csdn.net/">csdn</a></li>
+                <li><a href="http://m.oschina.net/">开源中国</a></li>
+                <li><a href="http://www.chinaunix.net/">chinaunix</a></li>
+                <li><a href="http://www.infoq.com/cn/">infoq</a></li>
+                <li><a href="http://www.lupaworld.com/portal.php">lupaworld</a></li>
+                <li><a href="http://51cto.com/">51cto</a></li>
+                <li><a href="http://www.tuicool.com/ah">推酷</a></li>
+                <li><a href="http://api.jquery.com/category/version/1.9/">jquery api</a></li>
+                <li><a href="http://stackoverflow.com/">stackoverflow</a></li>
+                <li><a href="http://news.html5cn.org/">html5cn</a></li>
+                <li><a href="http://www.apkbus.com/news1/eyes/">apkbus news</a></li>
+                <li><a href="https://github.com/blog/category/all">github blog</a></li>
+                <li><a href="http://api.jquery.com/category/version/1.9/">jquery api</a></li>
+            </ul>
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#frequentlyuusedsites" data-icon="home">常用</a></li>
+                    <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
+                    <li><a href="#home" data-icon="home">网站</a></li>
+                    <li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
+
+                    <li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div data-role="page" id="home">
+        <div data-role="header" data-position="fixed">
+            <h1>程序员小站</h1>
+            <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+                <a href="#add" data-role="button" data-icon="plus">分享网站</a>
+                <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
+                <a href="#registerpage" data-role="button" data-icon="forward">注册</a>
+                <a href="#loginpage" data-role="button" data-icon="star">登陆</a>
+
+            </div>
+
+        </div>
+
+
+        <div data-role="content">
+
+            <div class="ui-grid-solo">
+                <div class="ui-block-a">  <input style="min-width:300px;" type="text" name="wd" id="Text1" autocomplete="off" /></div>
+            </div>
+            <div class="ui-grid-e" style="border:0px; width: 100%; text-align: center;">
+
+                <div class="ui-block-a" style="border: 0px;float:none;display:inline-block;">  <input type="submit" onclick="baidu()" value="百度"></div>
+                <div class="ui-block-b" style="border: 0px;float:none;display:inline-block;">  <input type="submit" onclick="sougou()" value="搜狗"></div>
+                <div class="ui-block-c" style="border: 0px;float:none;display:inline-block; ">  <input type="submit" onclick="bing()" value="bing"></div>
+                <div class="ui-block-d" style="border: 0px;float:none;display:inline-block; ">  <input type="submit" onclick="google()" value="google"></div>
+                <div class="ui-block-d" style="border: 0px;float:none;display:inline-block; ">  <input type="submit" onclick="googlechina()" value="google中国"></div>
+                <div class="ui-block-d" style="border: 0px;float:none;display:inline-block; ">  <input type="submit" onclick="three360()" value="360"></div>
+            </div><div style="clear:both"></div><br>
+
+
+
+            <ul data-role="listview" data-inset="true" id="homeInfo"></ul>
+
+            <div data-role="collapsible" data-collapsed="false">
+                <h4>最新</h4>
+                <ul data-role="listview" data-inset="false" id="homeList"></ul>
+            </div>
+            <button id="moreweb">更多站点</button>
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#frequentlyuusedsites" data-icon="home">常用</a></li>
+                    <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
+                    <li><a href="#home" data-icon="home">网站</a></li>
+                    <li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
+
+                    <li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
 			$(document).on("pagebeforeshow","#home",bmobTool.listweb);
 			$("#moreweb").bind("click",function(){
 				bmobTool.setLimit({});
 				bmobTool.findweb();
 			});
-		</script>
-<!--结果页-->
-		<div data-role="page" id="result">
-			<div data-role="header" data-position="fixed" >
-				<h1>程序员小站</h1>
-				<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
-				<a href="#add" data-role="button" data-icon="plus" >分享网站</a>
-				<a href="#addarticle"   data-icon="plus"   data-role="button">分享文章</a>
-				<a href="#registerpage" data-role="button"  data-icon="forward" >注册</a>
-				<a href="#loginpage" data-role="button"  data-icon="star" >登陆</a>
-				
-				</div>
-			</div>
+    </script>
+    <!--结果页-->
+    <div data-role="page" id="result">
+        <div data-role="header" data-position="fixed">
+            <h1>程序员小站</h1>
+            <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+                <a href="#add" data-role="button" data-icon="plus">分享网站</a>
+                <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
+                <a href="#registerpage" data-role="button" data-icon="forward">注册</a>
+                <a href="#loginpage" data-role="button" data-icon="star">登陆</a>
 
-			<div data-role="content">
-				<h2></h2>
-				<ul data-role="listview" data-inset="true" id="resultInfo"></ul>
-				<ul data-role="listview" data-inset="true" id="resultList"></ul>
-				<div data-role="navbar">
-					<ul>
-						<li><button data-icon="arrow-l" id="firstPage">首页</button></li>
-						<li><button data-icon="arrow-l" id="prevPage">上一页</button></li>
-						<li><button data-icon="arrow-r" id="nextPage">下一页</button></li>
-						<li><button data-icon="arrow-r" id="lastPage">末页</button></li>
-					</ul>
-				</div>
+            </div>
+        </div>
 
-			</div>
+        <div data-role="content">
+            <h2></h2>
+            <ul data-role="listview" data-inset="true" id="resultInfo"></ul>
+            <ul data-role="listview" data-inset="true" id="resultList"></ul>
+            <div data-role="navbar">
+                <ul>
+                    <li><button data-icon="arrow-l" id="firstPage">首页</button></li>
+                    <li><button data-icon="arrow-l" id="prevPage">上一页</button></li>
+                    <li><button data-icon="arrow-r" id="nextPage">下一页</button></li>
+                    <li><button data-icon="arrow-r" id="lastPage">末页</button></li>
+                </ul>
+            </div>
 
-		<div data-role="footer" data-position="fixed" >
-				<div data-role="navbar">
-					<ul>
-                        <li><a href="#frequentlyuusedsites" data-icon="home" >常用</a></li>
-                         <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
-						<li><a href="#home" data-icon="home" >网站</a></li>
-						<li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
-                           
-                      	<li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
-					</ul>
-				</div>
-			</div>
-		</div> 
-		<script>
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#frequentlyuusedsites" data-icon="home">常用</a></li>
+                    <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
+                    <li><a href="#home" data-icon="home">网站</a></li>
+                    <li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
+
+                    <li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
 			$("#firstPage").bind("click",function(){
 				if(bmobTool.page>0){
 					bmobTool.page=0;
@@ -857,216 +857,226 @@ if (currentUser) {
 					bmobTool.findweb();
 				}
 			});
-		</script>
-		
-<!--页-->
-		<div data-role="page" id="addarticle">
-			<div data-role="header" data-position="fixed" >
-				<h1>程序员小站</h1>
-				<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
-				<a href="#add" data-role="button" data-icon="plus" >分享网站</a>
-				<a href="#addarticle"   data-icon="plus"  data-role="button" >分享文章</a>
-				<a href="#registerpage" data-role="button"  data-icon="forward" >注册</a>
-				<a href="#loginpage" data-role="button"  data-icon="star" >登陆</a>
-				
-				</div>
-			</div>
-			<div data-role="content">
-				<div data-role="fieldcontain">
-					<label for="add-articleurl">网址(*)：</label>
-					<input type="text" name="add-articleurl" id="add-articleurl">
-				</div>
-				<div data-role="fieldcontain">
-					<label for="add-articlename">标题：</label>
-					<input type="text" name="add-articlename" id="add-articlename">
-				</div>
-				<div data-role="fieldcontain">
-					<fieldset data-role="controlgroup" data-type="horizontal">
-						<legend>关键词(*)：</legend>
-							<label for="add-key-articlefrontend">软件</label>
-							<input type="checkbox" name="add-articlekeyword" id="add-key-articlefrontend" value="软件">
-							<label for="add-key-articlebackend">硬件</label>
-							<input type="checkbox" name="add-articlekeyword" id="add-key-articlebackend" value="硬件">
-					</fieldset>
-					<label for="add-keyword"  class=""></label>
-					<input type="text" name="add-articlekeyword" id="add-key-other" value="" placeholder="其他关键词，以英文逗号分割...">
-				</div>
-				<div data-role="fieldcontain">
- <fieldset data-role="controlgroup" data-type="horizontal">  
-                <legend>语言:</legend>  
-  
-                <input type="radio" name="favoritecolor" id="favoritecolora1" value="c#">  
-                <label for="favoritecolora1">c#</label>   
-  
-                <input type="radio" name="favoritecolor" id="favoritecolora2" value="java">  
-                <label for="favoritecolora2">java</label>   
-  
-                <input type="radio" name="favoritecolor" id="favoritecolora3" value="c++">  
-                <label for="favoritecolora3">c++</label>   
-  <input type="radio" name="favoritecolor" id="favoritecolora4" value="oc">  
-                <label for="favoritecolora4">oc</label>   
-  <input type="radio" name="favoritecolor" id="favoritecolora5" value="c">  
-                <label for="favoritecolora5">c</label>   
-  <input type="radio" name="favoritecolor" id="favoritecolora6" value="python">  
-                <label for="favoritecolora6">python</label>   
-  <input type="radio" name="favoritecolor" id="favoritecolora7" value="php">  
-                <label for="favoritecolora7">php</label>   
-  <input type="radio" name="favoritecolor" id="favoritecolora8" value="javascript">  
-                <label for="favoritecolora8">javascript</label>   
-  <input type="radio" name="favoritecolor" id="favoritecolora9" value="sql">  
-                <label for="favoritecolora9">sql</label>   
-  <input type="radio" name="favoritecolor" id="favoritecolora10" value="vb">  
-                <label for="favoritecolora10">vb</label>   
-  <input type="radio" name="favoritecolor" id="favoritecolora11" value="ruby">  
-                <label for="favoritecolora11">ruby</label>   
-  
-            </fieldset>  
-				</div>
-				
-				<button id="addarticlebtn">添加文章</button>
-			</div>
-		<div data-role="footer" data-position="fixed" >
-				<div data-role="navbar">
-					<ul>
-                        <li><a href="#frequentlyuusedsites" data-icon="home" >常用</a></li>
-                         <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
-						<li><a href="#home" data-icon="home" >网站</a></li>
-						<li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
-                           
-                      	<li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
-					</ul>
-				</div>
-			</div>
-			</div>
-		</div> 
-		<script>
+    </script>
+
+    <!--页-->
+    <div data-role="page" id="addarticle">
+        <div data-role="header" data-position="fixed">
+            <h1>程序员小站</h1>
+            <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+                <a href="#add" data-role="button" data-icon="plus">分享网站</a>
+                <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
+                <a href="#registerpage" data-role="button" data-icon="forward">注册</a>
+                <a href="#loginpage" data-role="button" data-icon="star">登陆</a>
+
+            </div>
+        </div>
+        <div data-role="content">
+            <div data-role="fieldcontain">
+                <label for="add-articleurl">网址(*)：</label>
+                <input type="text" name="add-articleurl" id="add-articleurl">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="add-articlename">标题：</label>
+                <input type="text" name="add-articlename" id="add-articlename">
+            </div>
+            <div data-role="fieldcontain">
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend>关键词(*)：</legend>
+                    <label for="add-key-articlefrontend">生活</label>
+                    <input type="checkbox" name="add-articlekeyword" id="add-key-articlefrontend" value="生活">
+                    <label for="add-key-articlebackend">学习</label>
+                    <input type="checkbox" name="add-articlekeyword" id="add-key-articlebackend" value="学习">
+                    <label for="add-key-articlework">工作</label>
+                    <input type="checkbox" name="add-articlekeyword" id="add-key-articlework" value="工作">
+                    <label for="add-key-articleentertainment">休闲</label>
+                    <input type="checkbox" name="add-articlekeyword" id="add-key-articleentertainment" value="休闲">
+                </fieldset>
+                <label for="add-keyword" class=""></label>
+                <input type="text" name="add-articlekeyword" id="add-key-other" value="" placeholder="其他关键词，以英文逗号分割...">
+            </div>
+            <div data-role="fieldcontain">
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend>语言:</legend>
+
+                    <input type="radio" name="favoritecolor" id="favoritecolora1" value="经济">
+                    <label for="favoritecolora1">经济</label>
+
+                    <input type="radio" name="favoritecolor" id="favoritecolora2" value="文化">
+                    <label for="favoritecolora2">文化</label>
+
+                    <input type="radio" name="favoritecolor" id="favoritecolora3" value="体育">
+                    <label for="favoritecolora3">体育</label>
+                    <input type="radio" name="favoritecolor" id="favoritecolora4" value="健身">
+                    <label for="favoritecolora4">健身</label>
+                    <input type="radio" name="favoritecolor" id="favoritecolora5" value="兴趣">
+                    <label for="favoritecolora5">兴趣</label>
+                    <input type="radio" name="favoritecolor" id="favoritecolora6" value="手工">
+                    <label for="favoritecolora6">手工</label>
+                    <input type="radio" name="favoritecolor" id="favoritecolora7" value="人文">
+                    <label for="favoritecolora7">人文</label>
+                    <input type="radio" name="favoritecolor" id="favoritecolora8" value="历史">
+                    <label for="favoritecolora8">历史</label>
+                    <input type="radio" name="favoritecolor" id="favoritecolora9" value="日记">
+                    <label for="favoritecolora9">日记</label>
+                    <input type="radio" name="favoritecolor" id="favoritecolora10" value="美食">
+                    <label for="favoritecolora10">美食</label>
+                    <input type="radio" name="favoritecolor" id="favoritecolora11" value="旅游">
+                    <label for="favoritecolora11">旅游</label>
+
+                </fieldset>
+            </div>
+
+            <button id="addarticlebtn">添加文章</button>
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#frequentlyuusedsites" data-icon="home">常用</a></li>
+                    <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
+                    <li><a href="#home" data-icon="home">网站</a></li>
+                    <li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
+
+                    <li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
 			$("#addarticlebtn").bind("click",function(){
 				bmobTool.addarticle();
 			});
-		</script>
+    </script>
 
-<!--搜索页-->
+    <!--搜索页-->
 
-		<div data-role="page" id="add">
-			<div data-role="header" data-position="fixed" >
-				<h1>程序员小站</h1>
-				<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
-				<a href="#add" data-role="button" data-icon="plus" >分享网站</a>
-				<a href="#addarticle"   data-icon="plus"  data-role="button" >分享文章</a>
-				<a href="#registerpage" data-role="button"  data-icon="forward" >注册</a>
-				<a href="#loginpage" data-role="button"  data-icon="star" >登陆</a>
-				
-				</div>
-			</div>
-			<div data-role="content">
-				<div data-role="fieldcontain">
-					<label for="add-url">网址(*)：</label>
-					<input type="text" name="add-url" id="add-url">
-				</div>
-				<div data-role="fieldcontain">
-					<label for="add-name">名称：</label>
-					<input type="text" name="add-name" id="add-name">
-				</div>
-				<div data-role="fieldcontain">
-					<fieldset data-role="controlgroup" data-type="horizontal">
-						<legend>关键词(*)：</legend>
-							<label for="add-key-frontend">前端</label>
-							<input type="checkbox" name="add-keyword" id="add-key-frontend" value="前端">
-							<label for="add-key-backend">后端</label>
-							<input type="checkbox" name="add-keyword" id="add-key-backend" value="后端">
-					</fieldset>
-					<label for="add-keyword"  class=""></label>
-					<input type="text" name="add-keyword" id="add-key-other" value="" placeholder="其他关键词，以英文逗号分割...">
-				</div>
-				<div data-role="fieldcontain">
-					<fieldset data-role="controlgroup" data-type="horizontal">
-						<legend>类型：</legend>
-							<label for="add-site">网站</label>
-							<input type="radio" name="add-type" id="add-site" value="site" checked>
-							<label for="add-blog">博客</label>
-							<input type="radio" name="add-type" id="add-blog" value="blog">	
-					</fieldset>
-				</div>
-				<div data-role="fieldcontain">
-					<label for="add-author">作者：</label>
-					<input type="text" name="add-author" id="add-author">
-				</div>
-				<div data-role="fieldcontain">
-					<label for="add-email">邮箱：</label>
-					<input type="text" name="add-email" id="add-email">
-				</div>
-				<button id="addweb">分享</button>
-			</div>
-		<div data-role="footer" data-position="fixed" >
-				<div data-role="navbar">
-					<ul>
-                        <li><a href="#frequentlyuusedsites" data-icon="home" >常用</a></li>
-                         <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
-						<li><a href="#home" data-icon="home" >网站</a></li>
-						<li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
-                           
-                      	<li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-			<script>
+    <div data-role="page" id="add">
+        <div data-role="header" data-position="fixed">
+            <h1>程序员小站</h1>
+            <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+                <a href="#add" data-role="button" data-icon="plus">分享网站</a>
+                <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
+                <a href="#registerpage" data-role="button" data-icon="forward">注册</a>
+                <a href="#loginpage" data-role="button" data-icon="star">登陆</a>
+
+            </div>
+        </div>
+        <div data-role="content">
+            <div data-role="fieldcontain">
+                <label for="add-url">网址(*)：</label>
+                <input type="text" name="add-url" id="add-url">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="add-name">名称：</label>
+                <input type="text" name="add-name" id="add-name">
+            </div>
+            <div data-role="fieldcontain">
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend>类型(*)：</legend>
+                    <label for="add-key-sitefrontend">生活</label>
+                    <input type="checkbox" name="add-sitekeyword" id="add-key-sitefrontend" value="生活">
+                    <label for="add-key-sitebackend">学习</label>
+                    <input type="checkbox" name="add-sitekeyword" id="add-key-sitebackend" value="学习">
+                    <label for="add-key-siteework">工作</label>
+                    <input type="checkbox" name="add-sitekeyword" id="add-key-sitework" value="工作">
+                    <label for="add-key-siteentertainment">休闲</label>
+                    <input type="checkbox" name="add-sitekeyword" id="add-key-siteentertainment" value="休闲">
+                </fieldset>
+                <label for="add-keyword" class=""></label>
+                <input type="text" name="add-keyword" id="add-key-other" value="" placeholder="其他关键词，以英文逗号分割...">
+            </div>
+            <div data-role="fieldcontain">
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend>类型：</legend>
+                    <label for="add-site">文字</label>
+                    <input type="radio" name="add-type" id="add-site" value="文字" checked>
+                    <label for="add-blog">音频</label>
+                    <input type="radio" name="add-type" id="add-blog" value="音频">
+                    <label for="add-video">视频</label>
+                    <input type="radio" name="add-type" id="add-video" value="视频">
+                </fieldset>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="add-author">作者：</label>
+                <input type="text" name="add-author" id="add-author">
+            </div>
+            <div data-role="fieldcontain">
+                <label for="add-email">邮箱：</label>
+                <input type="text" name="add-email" id="add-email">
+            </div>
+            <button id="addweb">分享</button>
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#frequentlyuusedsites" data-icon="home">常用</a></li>
+                    <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
+                    <li><a href="#home" data-icon="home">网站</a></li>
+                    <li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
+
+                    <li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
 			$("#addweb").bind("click",function(){
 				bmobTool.addweb();
 			});
-		</script>
-		<div data-role="page" id="search">
-			<div data-role="header" data-position="fixed" >
-				<h1>程序员小站</h1>
-				<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
-				<a href="#add" data-role="button" data-icon="plus" >分享网站</a>
-				<a href="#addarticle"   data-icon="plus"   data-role="button">分享文章</a>
-				<a href="#registerpage" data-role="button"  data-icon="forward" >注册</a>
-				<a href="#loginpage" data-role="button"  data-icon="star" >登陆</a>
-				
-				</div>
-			</div>
+    </script>
+    <div data-role="page" id="search">
+        <div data-role="header" data-position="fixed">
+            <h1>程序员小站</h1>
+            <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+                <a href="#add" data-role="button" data-icon="plus">分享网站</a>
+                <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
+                <a href="#registerpage" data-role="button" data-icon="forward">注册</a>
+                <a href="#loginpage" data-role="button" data-icon="star">登陆</a>
 
-			<div data-role="content">
-					
-				<div data-role="fieldcontain">
-					<label for="search-name">名称：</label>
-					<input type="text" name="search-name" id="search-name">
-				</div>
-				
-				<div data-role="fieldcontain">
-					<label for="search-keyword">关键词：</label>
-					<input type="text" name="search-keyword" id="search-keyword">
-				</div>
+            </div>
+        </div>
 
-				<div data-role="fieldcontain">
-					<fieldset data-role="controlgroup" data-type="horizontal">
-						<legend>类型：</legend>
-							<label for="search-site">网站</label>
-							<input type="checkbox" name="search-type" id="search-site" value="site">
-							<label for="search-blog">博客</label>
-							<input type="checkbox" name="search-type" id="search-blog" value="blog">	
-					</fieldset>
-				</div>
+        <div data-role="content">
 
-				<button id="searchweb">搜索</button>
+            <div data-role="fieldcontain">
+                <label for="search-name">名称：</label>
+                <input type="text" name="search-name" id="search-name">
+            </div>
 
-			</div>
+            <div data-role="fieldcontain">
+                <label for="search-keyword">关键词：</label>
+                <input type="text" name="search-keyword" id="search-keyword">
+            </div>
 
-		<div data-role="footer" data-position="fixed" >
-				<div data-role="navbar">
-					<ul>
-                        <li><a href="#frequentlyuusedsites" data-icon="home" >常用</a></li>
-                         <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
-						<li><a href="#home" data-icon="home" >网站</a></li>
-						<li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
-                           
-                      	<li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
-					</ul>
-				</div>
-			</div>
-		</div> 
-		<script>
+            <div data-role="fieldcontain">
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend>类型：</legend>
+                    <label for="search-site">网站</label>
+                    <input type="checkbox" name="search-type" id="search-site" value="site">
+                    <label for="search-blog">博客</label>
+                    <input type="checkbox" name="search-type" id="search-blog" value="blog">
+                </fieldset>
+            </div>
+
+            <button id="searchweb">搜索</button>
+
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#frequentlyuusedsites" data-icon="home">常用</a></li>
+                    <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
+                    <li><a href="#home" data-icon="home">网站</a></li>
+                    <li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
+
+                    <li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
 			$("#searchweb").bind("click",function(){
 				var data={};
 				data.name=$("#search-name").val();
@@ -1076,210 +1086,212 @@ if (currentUser) {
 				bmobTool.setLimit(data);
 				bmobTool.findweb();
 			});
-		</script>
-		
-<!--关于-->
+    </script>
 
-		<div data-role="page" id="about">
-			<div data-role="header" data-position="fixed" >
-				<h1>程序员小站</h1>
-				<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
-				<a href="#add" data-role="button" data-icon="plus" >分享网站</a>
-				<a href="#addarticle"   data-icon="plus"   data-role="button">分享文章</a>
-				<a href="#registerpage" data-role="button"  data-icon="forward" >注册</a>
-				<a href="#loginpage" data-role="button"  data-icon="star" >登陆</a>
-				
-				</div>
-			</div>
+    <!--关于-->
 
-			<div data-role="content">
-				  <ul data-role="listview">
-                    <li><a href="http://tieba.baidu.com/f?ie=utf-8&kw=%E7%A8%8B%E5%BA%8F%E5%91%98">程序员吧</a></li>
-                    <li><a href="http://tieba.baidu.com/f?ie=utf-8&kw=java">java吧</a></li>
-                    <li><a href="http://www.v2ex.com/">v2ex</a></li>
-                    <li><a href="http://wap.ithome.com/">ithome</a></li>
-                    <li><a href="http://ing.cnblogs.com/mobile/home/">博客园闪存</a></li>
-                    <li><a href="http://tieba.baidu.com/f?kw=c%23">c#吧</a></li>
-                    <li><a href="http://tieba.baidu.com/f?ie=utf-8&kw=%E7%AE%97%E6%B3%95">算法吧</a></li>
-                    <li><a href="http://tieba.baidu.com/f?kw=c%2B%2B">c++吧</a></li>
-                    <li><a href="http://tieba.baidu.com/f?kw=%B1%E0%B3%CC">编程吧</a></li>                 
-                    <li><a href="http://stackoverflow.com/">stackoverflow</a></li>
-                    <li><a href="http://news.html5cn.org/">html5cn</a></li>
-                    <li><a href="http://www.apkbus.com/news1/eyes/">apkbus news</a></li>                    
-                </ul>         
-						<h2>qq群:425071394</h2>
-					<a href="http://gisdaodao.github.io/itsites/ViewPagerbroswer.apk"  data-role="button">点击下载android 客户端</a>
-					<div class="jiathis_style_32x32">
-						<a class="jiathis_button_qzone"></a>
-						<a class="jiathis_button_tsina" ></a>
-						<a class="jiathis_button_tqq" ></a>
-						<a class="jiathis_button_weixin" ></a>
-						<a class="jiathis_button_renren" ></a>
-						<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-						<a class="jiathis_counter_style" ></a>
-					</div>
-					<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
-			</div>
-
-		<div data-role="footer" data-position="fixed" >
-				<div data-role="navbar">
-					<ul>
-                        <li><a href="#frequentlyuusedsites" data-icon="home" >常用</a></li>
-                         <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
-						<li><a href="#home" data-icon="home" >网站</a></li>
-						<li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
-                           
-                      	<li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
-					</ul>
-				</div>
-			</div>
-		</div> 
-        <div data-role="page" id="doconline">
-			<div data-role="header" data-position="fixed" >
-				<h1>程序员小站</h1>
-				<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
-				<a href="#add" data-role="button" data-icon="plus" >分享网站</a>
-				<a href="#addarticle"   data-icon="plus"  data-role="button" >分享文章</a>
-				<a href="#registerpage" data-role="button"  data-icon="forward" >注册</a>
-				<a href="#loginpage" data-role="button"  data-icon="star" >登陆</a>
-				
-				</div>
-			</div>
-
-			<div data-role="content">
-                                <a href="http://docs.oracle.com/javase/8/docs/api/" data-role="button">java</a>
-                                <a href="http://www.cplusplus.com/reference/" data-role="button"">c++</a>
-                                <a href="http://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html" data-role="button">c</a>
-                                <a href="https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx" data-role="button">c#</a>
-                                <a href="http://www.w3schools.com/html/default.asp" data-role="button">HTML5</a>
-                                <a href="http://www.w3schools.com/css/default.asp" data-role="button">CSS</a>
-                                <a href="http://www.w3schools.com/js/default.asp" data-role="button">javascript</a>
-                                <a href="http://www.w3schools.com/sql/default.asp" data-role="button">SQL</a>
-                                <a href="https://secure.php.net/manual/en/index.php" data-role="button">PHP</a>
-			</div>
-
-				<div data-role="footer" data-position="fixed" >
-				<div data-role="navbar">
-					<ul>
-                        <li><a href="#frequentlyuusedsites" data-icon="home" >常用</a></li>
-                         <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
-						<li><a href="#home" data-icon="home" >网站</a></li>
-						<li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
-                           
-                      	<li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
-					</ul>
-				</div>
-			</div>
-		</div> 
-        <div data-role="page" id="speech">
-            <div data-role="header" data-position="fixed"  >
-				<h1>程序员小站</h1>
-				<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
-				<a href="#add" data-role="button" data-icon="plus" >分享网站</a>
-				<a href="#addarticle"   data-icon="plus"  data-role="button" >分享文章</a>
-				<a href="#registerpage" data-role="button"  data-icon="forward" >注册</a>
-				<a href="#loginpage" data-role="button"  data-icon="star" >登陆</a>
-				
-				</div>
-			</div>
-              <div data-role="content">
-             
-                        <ul data-role="listview">
-                             <li><a href="http://gisdaodao.github.io/itsites/lecture/20151024扎克伯格清华中文演讲.html">20151024扎克伯格清华中文演讲</a></li>                                                     
-                            <li><a href="http://gisdaodao.github.io/itsites/lecture/20150518库克在美国乔治华盛顿大学发表了演讲.html">20150518库克在美国乔治华盛顿大学发表了演讲</a></li>
-                              <li><a href="http://edu.sina.com.cn/en/2015-01-21/180787227.shtml">2014经典演讲之比尔盖茨斯坦福演讲(双语)</a></li>
-                              <li><a href="#articlelit" data-icon="info" data-transition="slide">文章列表</a></li>
-                        </ul>           
-                    </div>
-            
-		<div data-role="footer" data-position="fixed" >
-				<div data-role="navbar">
-					<ul>
-                        <li><a href="#frequentlyuusedsites" data-icon="home" >常用</a></li>
-                         <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
-						<li><a href="#home" data-icon="home" >网站</a></li>
-						<li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
-                           
-                      	<li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
-					</ul>
-				</div>
-			</div>
-        </div>
- <div data-role="page" id="articlelit">
+    <div data-role="page" id="about">
         <div data-role="header" data-position="fixed">
             <h1>程序员小站</h1>
-         	<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
-				<a href="#add" data-role="button" data-icon="plus" >分享网站</a>
-				<a href="#addarticle"   data-icon="plus"  data-role="button" >分享文章</a>
-				<a href="#registerpage" data-role="button"  data-icon="forward" >注册</a>
-				<a href="#loginpage" data-role="button"  data-icon="star" >登陆</a>
-				
-				</div>
+            <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+                <a href="#add" data-role="button" data-icon="plus">分享网站</a>
+                <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
+                <a href="#registerpage" data-role="button" data-icon="forward">注册</a>
+                <a href="#loginpage" data-role="button" data-icon="star">登陆</a>
+
+            </div>
+        </div>
+
+        <div data-role="content">
+            <ul data-role="listview">
+                <li><a href="http://tieba.baidu.com/f?ie=utf-8&kw=%E7%A8%8B%E5%BA%8F%E5%91%98">程序员吧</a></li>
+                <li><a href="http://tieba.baidu.com/f?ie=utf-8&kw=java">java吧</a></li>
+                <li><a href="http://www.v2ex.com/">v2ex</a></li>
+                <li><a href="http://wap.ithome.com/">ithome</a></li>
+                <li><a href="http://ing.cnblogs.com/mobile/home/">博客园闪存</a></li>
+                <li><a href="http://tieba.baidu.com/f?kw=c%23">c#吧</a></li>
+                <li><a href="http://tieba.baidu.com/f?ie=utf-8&kw=%E7%AE%97%E6%B3%95">算法吧</a></li>
+                <li><a href="http://tieba.baidu.com/f?kw=c%2B%2B">c++吧</a></li>
+                <li><a href="http://tieba.baidu.com/f?kw=%B1%E0%B3%CC">编程吧</a></li>
+                <li><a href="http://stackoverflow.com/">stackoverflow</a></li>
+                <li><a href="http://news.html5cn.org/">html5cn</a></li>
+                <li><a href="http://www.apkbus.com/news1/eyes/">apkbus news</a></li>
+            </ul>
+            <h2>qq群:425071394</h2>
+            <a href="http://gisdaodao.github.io/itsites/ViewPagerbroswer.apk" data-role="button">点击下载android 客户端</a>
+            <div class="jiathis_style_32x32">
+                <a class="jiathis_button_qzone"></a>
+                <a class="jiathis_button_tsina"></a>
+                <a class="jiathis_button_tqq"></a>
+                <a class="jiathis_button_weixin"></a>
+                <a class="jiathis_button_renren"></a>
+                <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+                <a class="jiathis_counter_style"></a>
+            </div>
+            <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#frequentlyuusedsites" data-icon="home">常用</a></li>
+                    <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
+                    <li><a href="#home" data-icon="home">网站</a></li>
+                    <li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
+
+                    <li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div data-role="page" id="doconline">
+        <div data-role="header" data-position="fixed">
+            <h1>程序员小站</h1>
+            <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+                <a href="#add" data-role="button" data-icon="plus">分享网站</a>
+                <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
+                <a href="#registerpage" data-role="button" data-icon="forward">注册</a>
+                <a href="#loginpage" data-role="button" data-icon="star">登陆</a>
+
+            </div>
+        </div>
+
+        <div data-role="content">
+            <a href="http://docs.oracle.com/javase/8/docs/api/" data-role="button">java</a>
+            <a href="http://www.cplusplus.com/reference/" data-role="button" ">c++</a>
+            <a href="http://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html" data-role="button">c</a>
+            <a href="https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx" data-role="button">c#</a>
+            <a href="http://www.w3schools.com/html/default.asp" data-role="button">HTML5</a>
+            <a href="http://www.w3schools.com/css/default.asp" data-role="button">CSS</a>
+            <a href="http://www.w3schools.com/js/default.asp" data-role="button">javascript</a>
+            <a href="http://www.w3schools.com/sql/default.asp" data-role="button">SQL</a>
+            <a href="https://secure.php.net/manual/en/index.php" data-role="button">PHP</a>
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#frequentlyuusedsites" data-icon="home">常用</a></li>
+                    <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
+                    <li><a href="#home" data-icon="home">网站</a></li>
+                    <li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
+
+                    <li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div data-role="page" id="speech">
+        <div data-role="header" data-position="fixed">
+            <h1>程序员小站</h1>
+            <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+                <a href="#add" data-role="button" data-icon="plus">分享网站</a>
+                <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
+                <a href="#registerpage" data-role="button" data-icon="forward">注册</a>
+                <a href="#loginpage" data-role="button" data-icon="star">登陆</a>
+
+            </div>
+        </div>
+        <div data-role="content">
+
+            <ul data-role="listview">
+                <li><a href="http://gisdaodao.github.io/itsites/lecture/20151024扎克伯格清华中文演讲.html">20151024扎克伯格清华中文演讲</a></li>
+                <li><a href="http://gisdaodao.github.io/itsites/lecture/20150518库克在美国乔治华盛顿大学发表了演讲.html">20150518库克在美国乔治华盛顿大学发表了演讲</a></li>
+                <li><a href="http://edu.sina.com.cn/en/2015-01-21/180787227.shtml">2014经典演讲之比尔盖茨斯坦福演讲(双语)</a></li>
+                <li><a href="#articlelit" data-icon="info" data-transition="slide">文章列表</a></li>
+            </ul>
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#frequentlyuusedsites" data-icon="home">常用</a></li>
+                    <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
+                    <li><a href="#home" data-icon="home">网站</a></li>
+                    <li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
+
+                    <li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div data-role="page" id="articlelit">
+        <div data-role="header" data-position="fixed">
+            <h1>程序员小站</h1>
+            <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+                <a href="#add" data-role="button" data-icon="plus">分享网站</a>
+                <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
+                <a href="#registerpage" data-role="button" data-icon="forward">注册</a>
+                <a href="#loginpage" data-role="button" data-icon="star">登陆</a>
+
+            </div>
         </div>
         <div data-role="content">
             <div class="ui-grid-a">
-                <div class="ui-block-a">  <input type="button" value="软件" onclick="findSoft()"></div>
-                <div class="ui-block-b">  <input type="button" value="硬件" onclick="findHard()"></div>
+                <div class="ui-block-a">  <input type="button" value="生活" onclick="findSoft()"></div>
+                <div class="ui-block-b">  <input type="button" value="学习" onclick="findHard()"></div>
+                <div class="ui-block-a">  <input type="button" value="工作" onclick="findSoft()"></div>
+                <div class="ui-block-b">  <input type="button" value="休闲" onclick="findHard()"></div>
             </div>
             <div data-role="collapsible">
                 <h5>语言</h5>
                 <fieldset data-role="controlgroup" data-type="horizontal" id="favoritecolor1">
 
-                    <input type="radio" name="favoritecolor1" id="favoritecolora1" value="c#">
-                    <label for="favoritecolora1">c#</label>
-                    <input type="radio" name="favoritecolor1" id="favoritecolora2" value="java">
-                    <label for="favoritecolora2">java</label>
-                    <input type="radio" name="favoritecolor1" id="favoritecolora3" value="c++">
-                    <label for="favoritecolora3">c++</label>
-                    <input type="radio" name="favoritecolor1" id="favoritecolora4" value="oc">
-                    <label for="favoritecolora4">oc</label>
-                    <input type="radio" name="favoritecolor1" id="favoritecolora5" value="c">
-                    <label for="favoritecolora5">c</label>
-                    <input type="radio" name="favoritecolor1" id="favoritecolora6" value="python">
-                    <label for="favoritecolora6">python</label>
-                    <input type="radio" name="favoritecolor1" id="favoritecolora7" value="php">
-                    <label for="favoritecolora7">php</label>
-                    <input type="radio" name="favoritecolor1" id="favoritecolora8" value="javascript">
-                    <label for="favoritecolora8">javascript</label>
-                    <input type="radio" name="favoritecolor1" id="favoritecolora9" value="sql">
-                    <label for="favoritecolora9">sql</label>
-                    <input type="radio" name="favoritecolor1" id="favoritecolora10" value="vb">
-                    <label for="favoritecolora10">vb</label>
-                    <input type="radio" name="favoritecolor1" id="favoritecolora11" value="ruby">
-                    <label for="favoritecolora11">ruby</label>
+                    <input type="radio" name="favoritecolor1" id="favoritecolora1" value="历史">
+                    <label for="favoritecolora1">历史</label>
+                    <input type="radio" name="favoritecolor1" id="favoritecolora2" value="文化">
+                    <label for="favoritecolora2">文化</label>
+                    <input type="radio" name="favoritecolor1" id="favoritecolora3" value="地理">
+                    <label for="favoritecolora3">地理</label>
+                    <input type="radio" name="favoritecolor1" id="favoritecolora4" value="旅游">
+                    <label for="favoritecolora4">旅游</label>
+                    <input type="radio" name="favoritecolor1" id="favoritecolora5" value="户外">
+                    <label for="favoritecolora5">户外</label>
+                    <input type="radio" name="favoritecolor1" id="favoritecolora6" value="经济">
+                    <label for="favoritecolora6">经济</label>
+                    <input type="radio" name="favoritecolor1" id="favoritecolora7" value="体育">
+                    <label for="favoritecolora7">体育</label>
+                    <input type="radio" name="favoritecolor1" id="favoritecolora8" value="财经">
+                    <label for="favoritecolora8">财经</label>
+                    <input type="radio" name="favoritecolor1" id="favoritecolora9" value="数码">
+                    <label for="favoritecolora9">数码</label>
+                    <input type="radio" name="favoritecolor1" id="favoritecolora10" value="科技">
+                    <label for="favoritecolora10">科技</label>
+                    <input type="radio" name="favoritecolor1" id="favoritecolora11" value="日记">
+                    <label for="favoritecolora11">日记</label>
 
                 </fieldset>
             </div>
             <ul data-role="listview" data-inset="true" id="articleList"></ul>
         </div>
-       	<div data-role="footer" data-position="fixed" >
-				<div data-role="navbar">
-					<ul>
-                        <li><a href="#frequentlyuusedsites" data-icon="home" >常用</a></li>
-                         <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
-						<li><a href="#home" data-icon="home" >网站</a></li>
-						<li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
-                           
-                      	<li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
-					</ul>
-				</div>
-			</div>
-    </div> 
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#frequentlyuusedsites" data-icon="home">常用</a></li>
+                    <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
+                    <li><a href="#home" data-icon="home">网站</a></li>
+                    <li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
+
+                    <li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <script>
     function findSoft(){
 				var data={};
-				data.articletype="软件"
+				data.articletype = "生活"
 				if($('#favoritecolor1 .ui-radio-on').text()!="")data.codelanguage=$('#favoritecolor1 .ui-radio-on').text();
 				bmobTool.setLimit(data);
 				bmobTool.findarticle();
 			}
 	function findHard(){
 				var data={};
-				data.articletype="硬件"
+				data.articletype = "学习"
 				bmobTool.setLimit(data);
 				bmobTool.findarticle();
 			}
-		
+
  $("input[type='radio'][name='favoritecolor1']").bind("change",function(event,ui){
                          	var codedata={};
 				if($('#favoritecolor1 .ui-radio-on').text()!="")
@@ -1289,59 +1301,59 @@ if (currentUser) {
  });
  $(document).on("pageinit","#articlelit",function(){
 	var data={};
-				data.articletype="软件"
+	data.articletype = "生活"
 				if($('#favoritecolor1 .ui-radio-on').text()!="")data.codelanguage=$('#favoritecolor1 .ui-radio-on').text();
 				bmobTool.setLimit(data);
 				bmobTool.findarticle();
 });
     </script>
-     <div data-role="page" id="loginpage">
-            <div data-role="header" data-position="fixed"  >
-				<h1>程序员小站-登录</h1>
-				<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
-				<a href="#add" data-role="button" data-icon="plus" >分享网站</a>
-				<a href="#addarticle"   data-icon="plus"   data-role="button">分享文章</a>
-				<a href="#registerpage" data-role="button"  data-icon="forward" >注册</a>
-				<a href="#loginpage" data-role="button"  data-icon="star" >登陆</a>
-				
-				</div>
-			</div>
-              <div data-role="content">
-             <div data-role="fieldcontain" >
-					<label for="user-loginname">用户名：</label>
-					<input type="text" name="user-loginname" id="user-loginname">
-				</div>
-				
-				<div data-role="fieldcontain">
-					<label for="user-loginpasswordword">密码：</label>
-					<input type="text" name="user-loginpasswordword" id="user-loginpasswordword">
-				</div>
-                      <button id="loginbtn" onclick="Login()">登录</button>
-                     
-                      	<div  class="ui-grid-c">
-                      	     <div class="ui-block-a"> <input type="button"  value="收藏的文章" onclick=""></input>	 </div>
-                      	     <div class="ui-block-b">  <input type="button"  value="分享/发表的文章" onclick=""></input>	 </div>
-                      	       <div class="ui-block-c"> <input type="button"  value="收藏的网站" onclick=""></input>	 </div>
-                      	       <div class="ui-block-d">  <input type="button"  value="收藏/创建的网站" onclick=""></input>	 </div>
-                      	 </div>
-                      	  <ul data-role="listview" data-inset="true" id="shoucangarticleList"></ul>
-                      
-                    </div>
-            
-		<div data-role="footer" data-position="fixed" >
-				<div data-role="navbar">
-					<ul>
-                        <li><a href="#frequentlyuusedsites" data-icon="home" >常用</a></li>
-                         <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
-						<li><a href="#home" data-icon="home" >网站</a></li>
-						<li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
-                           
-                      	<li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
-					</ul>
-				</div>
-			</div>
+    <div data-role="page" id="loginpage">
+        <div data-role="header" data-position="fixed">
+            <h1>程序员小站-登录</h1>
+            <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+                <a href="#add" data-role="button" data-icon="plus">分享网站</a>
+                <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
+                <a href="#registerpage" data-role="button" data-icon="forward">注册</a>
+                <a href="#loginpage" data-role="button" data-icon="star">登陆</a>
+
+            </div>
         </div>
-        <script>
+        <div data-role="content">
+            <div data-role="fieldcontain">
+                <label for="user-loginname">用户名：</label>
+                <input type="text" name="user-loginname" id="user-loginname">
+            </div>
+
+            <div data-role="fieldcontain">
+                <label for="user-loginpasswordword">密码：</label>
+                <input type="text" name="user-loginpasswordword" id="user-loginpasswordword">
+            </div>
+            <button id="loginbtn" onclick="Login()">登录</button>
+
+            <div class="ui-grid-c">
+                <div class="ui-block-a"> <input type="button" value="收藏的文章" onclick=""></input>	 </div>
+                <div class="ui-block-b">  <input type="button" value="分享/发表的文章" onclick=""></input>	 </div>
+                <div class="ui-block-c"> <input type="button" value="收藏的网站" onclick=""></input>	 </div>
+                <div class="ui-block-d">  <input type="button" value="收藏/创建的网站" onclick=""></input>	 </div>
+            </div>
+            <ul data-role="listview" data-inset="true" id="shoucangarticleList"></ul>
+
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#frequentlyuusedsites" data-icon="home">常用</a></li>
+                    <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
+                    <li><a href="#home" data-icon="home">网站</a></li>
+                    <li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
+
+                    <li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
         $(document).on("pageinit","#loginpage",function(){
 var currentUser = Bmob.User.current();
 if (currentUser) {
@@ -1354,7 +1366,7 @@ bmobTool.queryshareandfavorator(currentUser.id);
 //bmobTool.queryshareandfavorator();
 });
         function 	Login(){
-    	Bmob.initialize("39dfc34280e39b5411c3e450466da0f2", "4b59ff42a72875986c89551344a2b218");
+    	Bmob.initialize("1f570053c58338812a8970abbbaaa623", "d803ea3828a42eba94ecbc9ea47d435a");
 var user = new Bmob.User();
 var username=$("#user-loginname").val();
 var password=$("#user-loginpasswordword").val();
@@ -1367,49 +1379,49 @@ Bmob.User.logIn(username,password, {
   }
 });
 	}
-        </script>
-               <div data-role="page" id="registerpage">
-            <div data-role="header" data-position="fixed"  >
-				<h1>程序员小站-注册</h1>
-				<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
-				<a href="#add" data-role="button" data-icon="plus" >分享网站</a>
-				<a href="#addarticle"   data-icon="plus"   data-role="button">分享文章</a>
-				<a href="#registerpage" data-role="button"  data-icon="forward" >注册</a>
-				<a href="#loginpage" data-role="button"  data-icon="star" >登陆</a>
-				
-				</div>
-			</div>
-              <div data-role="content">
-             <div data-role="fieldcontain">
-					<label for="user-registername">用户名：</label>
-					<input type="text" name="user-registername" id="user-registername">
-				</div>
-				
-				<div data-role="fieldcontain">
-					<label for="user-registerkeyword">密码：</label>
-					<input type="text" name="user-registerpasswordword" id="user-registerpasswordword">
-				</div>
-                      <input type="button" id="registerbtn"  value="注册" onclick="Register()"></input>
-                      
-                    </div>
-            
-		<div data-role="footer" data-position="fixed" >
-				<div data-role="navbar">
-					<ul>
-                        <li><a href="#frequentlyuusedsites" data-icon="home" >常用</a></li>
-                         <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
-						<li><a href="#home" data-icon="home" >网站</a></li>
-						<li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
-                           
-                      	<li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
-					</ul>
-				</div>
-			</div>
-        </div>     
-			
-	<script>
+    </script>
+    <div data-role="page" id="registerpage">
+        <div data-role="header" data-position="fixed">
+            <h1>程序员小站-注册</h1>
+            <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+                <a href="#add" data-role="button" data-icon="plus">分享网站</a>
+                <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
+                <a href="#registerpage" data-role="button" data-icon="forward">注册</a>
+                <a href="#loginpage" data-role="button" data-icon="star">登陆</a>
+
+            </div>
+        </div>
+        <div data-role="content">
+            <div data-role="fieldcontain">
+                <label for="user-registername">用户名：</label>
+                <input type="text" name="user-registername" id="user-registername">
+            </div>
+
+            <div data-role="fieldcontain">
+                <label for="user-registerkeyword">密码：</label>
+                <input type="text" name="user-registerpasswordword" id="user-registerpasswordword">
+            </div>
+            <input type="button" id="registerbtn" value="注册" onclick="Register()"></input>
+
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#frequentlyuusedsites" data-icon="home">常用</a></li>
+                    <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
+                    <li><a href="#home" data-icon="home">网站</a></li>
+                    <li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
+
+                    <li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
 	function Register(){
-	Bmob.initialize("39dfc34280e39b5411c3e450466da0f2", "4b59ff42a72875986c89551344a2b218");
+	Bmob.initialize("1f570053c58338812a8970abbbaaa623", "d803ea3828a42eba94ecbc9ea47d435a");
 var user = new Bmob.User();
 var username=$("#user-registername").val();
 var password=$("#user-registerpasswordword").val();
@@ -1425,10 +1437,10 @@ user.signUp(null, {
   }
 });
 }
-	
-	
+
+
 var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256749878'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256749878' type='text/javascript'%3E%3C/script%3E"));
-	</script>
-	
-	</body>
-	</html>
+    </script>
+
+</body>
+</html>
