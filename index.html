@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+
+	<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="baidu-site-verification" content="XhxLn5rr0E" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="Keywords" content="程序员小站, 程序员网址导航,编程网站" />
+		<!--请不要拿走或者抄袭我们的创意,如果你需要，,我们可以把这个小站卖给你,如果想借鉴，请付点咨询费<link rel="stylesheet" href="./include/jquery.mobile-1.4.5.min.css" />
+		<script src="./include/jquery-1.8.3.min.js"></script>
+		<script src="./include/jquery.mobile-1.4.5.min.js"></script>
+		<script src="./include/bmob-min.js"></script>-->
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+		<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+		<script src="http://gisdaodao.github.io/itsites/bmob-min.js"></script>
+
+
+
+    <style>
+
+div.search{
+}
+div.search img,div.search div.text,div.search input.but{
+}
+div.search div.text{
+}
+div.search div.text input{
+}
+div.search div#auto{
+	z-index:1;
+	position:absolute;
+	background-color:#FFFFFF;
+	display:none;
+	border:1px #74c0f9 solid;
+}
+div.search input.but{
+	border:1px #74c0f9 solid;
+}
+    </style>
+    <script>
+        var changeStr = '';   //初始化一个
+        function baidu() {
+            //获取用户输入的关键字
+            var strdomin = $("#Text1").val();
+            var TEMP = window.open("https://www.baidu.com/s?wd=" + strdomin);
+        }
+function sougou() {
+    //获取用户输入的关键字
+    var strdomin = $("#Text1").val();
+    var TEMP = window.open("http://www.sogou.com/web?query=" + strdomin);
+}
+function three360() {
+    //获取用户输入的关键字
+    var strdomin = $("#Text1").val();
+    var TEMP = window.open("http://www.haosou.com/s?q=" + strdomin);
+}
+function bing() {
+    //获取用户输入的关键字
+    var strdomin = $("#Text1").val();
+    var TEMP = window.open("http://global.bing.com/search?q=" + strdomin);
+}
+function google() {
+    //获取用户输入的关键字
+    var strdomin = $("#Text1").val();
+    var TEMP = window.open("https://www.google.com/#&q=" + strdomin);
+}
+function googlechina() {
+    //获取用户输入的关键字
+    var strdomin = $("#Text1").val();
+    var TEMP = window.open("https://www.google.com.hk/#&q=" + strdomin);
+}
+function FillUrls() {
+    //获取用户输入的关键字
+    var strdomin = $("#Text1").val()
+
+    //如果请求为空的话就不进行请求b
+    if (strdomin == null || strdomin == "") {
+        $("#auto").empty();
+        $("#auto").hide();
+        return;
+    }
+    //跟上次请求的关键字相同就返回
+    //    if (changeStr == strdomin)
+    //        return;  
+
+    changeStr = strdomin;
+    window.status = "请求中";
+
+    //封装请求百度服务器的参数（只有关键字是动态的，其他几个参数都是固定的）
+    var qsData = { 'wd': strdomin, 'p': '3', 'cb': 'ShowDiv', 't': new Date().getMilliseconds().toString() };
+    //发jsonp（跨域请求js）
+    $.ajax({
+        async: false,
+        url: "http://suggestion.baidu.com/su",
+        type: "GET",
+        dataType: 'jsonp',
+        jsonp: 'jsoncallback',
+        data: qsData,
+        timeout: 5000,
+        success: function (json) {
+        },
+        error: function (xhr) {
+        }
+    });
+}
+
+function ShowDiv(strurls) {
+    autoDisplay(strurls);
+    window.status = "请求结束";
+}
+
+function autoDisplay(autoStr) {
+    var Info = autoStr['s']   //拿到关键字提示
+
+    var wordText = $("#searchText").val();
+    var autoNode = $("#auto");   //缓存对象（弹出框）
+
+    if (Info.length == 0) {
+        autoNode.hide();
+        return false;
+    }
+
+    autoNode.empty();  //清空上次
+    for (var i = 0; i < Info.length; i++) {
+        var wordNode = Info[i];   //弹出框里的每一条内容
+
+        var newDivNode = $("<div>").attr("id", i);    //设置每个节点的id值
+        newDivNode.attr("style", "font:14px/25px arial;height:25px;padding:0 8px;cursor: pointer;");
+
+        newDivNode.html(wordNode).appendTo(autoNode);  //追加到弹出框
+
+        //鼠标移入高亮，移开不高亮
+        newDivNode.mouseover(function () {
+            if (highlightindex != -1) {        //原来高亮的节点要取消高亮（是-1就不需要了）
+                autoNode.children("div").eq(highlightindex).css("background-color", "white");
+            }
+            //记录新的高亮节点索引
+            highlightindex = $(this).attr("id");
+            $(this).css("background-color", "#ebebeb");
+        });
+        newDivNode.mouseout(function () {
+            $(this).css("background-color", "white");
+        });
+
+        //鼠标点击文字上屏
+        newDivNode.click(function () {
+            //取出高亮节点的文本内容
+            var comText = autoNode.hide().children("div").eq(highlightindex).text();
+            highlightindex = -1;
+            //文本框中的内容变成高亮节点的内容
+            $("#searchText").val(comText);
+        })
+        if (Info.length > 0) {    //如果返回值有内容就显示出来
+            autoNode.show();
+        } else {               //服务器端无内容返回 那么隐藏弹出框
+            autoNode.hide();
+            //弹出框隐藏的同时，高亮节点索引值也变成-1
+            highlightindex = -1;
+        }
+
+    }
+
+}
+
+var timeoutId;   //延迟请求服务器
+var highlightindex = -1;   //高亮
+$(function () {
+    $("#searchText").keyup(function (event) {
+        var myEvent = event || window.event;
+        var keyCode = myEvent.keyCode;    //键值 不同的值代表不同的键  13是回车等
+        //console.log(keyCode);
+
+        //只有按键盘的字母键、退格、删除、空格、ESC等键才进行响应：8退格backspace 46删除delete 空格32
+        if (keyCode >= 65 && keyCode <= 90 || keyCode >= 48 && keyCode <= 57 || keyCode >= 96 && keyCode <= 111 || keyCode >= 186 && keyCode <= 222 || keyCode == 8 || keyCode == 46 || keyCode == 32 || keyCode == 13) {
+            //考虑到请求是百度的服务器，故不需要考虑性能问题，没必要等几秒再请求，直接实时请求。如果延时请求，解开下面代码即可
+            //                    clearTimeout(timeoutId);
+            //                    timeoutId = setTimeout(function () {
+            //                        timeoutId = FillUrls();
+            //                    }, 500)
+            FillUrls();
+            if (highlightindex != -1) {
+                highlightindex = -1;
+                //autoNodes.eq(highlightindex).css("background-color", "white");
+            }
+        }
+
+        else if (keyCode == 38 || keyCode == 40) {
+            if (keyCode == 38) {       //向上
+                var autoNodes = $("#auto").children("div")
+                if (highlightindex != -1) {
+                    //如果原来存在高亮节点，则将背景色改称白色
+                    autoNodes.eq(highlightindex).css("background-color", "white");
+                    highlightindex--;
+                } else {
+                    highlightindex = autoNodes.length - 1;
+                }
+                if (highlightindex == -1) {
+                    //如果修改索引值以后index变成-1，则将索引值指向最后一个元素
+                    highlightindex = autoNodes.length - 1;
+                }
+                //让现在高亮的内容变成红色
+                autoNodes.eq(highlightindex).css("background-color", "#ebebeb");
+
+                //取出当前选中的项 赋值到输入框内
+                var comText = autoNodes.eq(highlightindex).text();
+                $("#searchText").val(comText);
+            }
+            if (keyCode == 40) {    //向下
+                var autoNodes = $("#auto").children("div")
+                if (highlightindex != -1) {
+                    //如果原来存在高亮节点，则将背景色改称白色
+                    autoNodes.eq(highlightindex).css("background-color", "white");
+                }
+                highlightindex++;
+                if (highlightindex == autoNodes.length) {
+                    //如果修改索引值以后index变成-1，则将索引值指向最后一个元素
+                    highlightindex = 0;
+                }
+                //让现在高亮的内容变成红色
+                autoNodes.eq(highlightindex).css("background-color", "#ebebeb");
+
+                var comText = autoNodes.eq(highlightindex).text();
+                $("#searchText").val(comText);
+            }
+        } else if (keyCode == 13) {     //回车
+            //下拉框有高亮内容
+            if (highlightindex != -1) {
+                //取出高亮节点的文本内容
+                var comText = $("#auto").hide().children("div").eq(highlightindex).text();
+                highlightindex = -1;
+                //文本框中的内容变成高亮节点的内容
+                $("#searchText").val(comText);
+            } else {
+                //下拉框没有高亮内容
+                $("#auto").hide();
+
+                //已经提交，让文本框失去焦点（再点提交或者按回车就不会触发keyup事件了）
+                $("#searchText").get(0).blur();
+            }
+        } else if (keyCode == 27) {    //按下Esc 隐藏弹出层
+            if ($("#auto").is(":visible")) {
+                $("#auto").hide();
+            }
+        }
+    });
+
+    //点击页面隐藏自动补全提示框
+    document.onclick = function (e) {
+        var e = e ? e : window.event;
+        var tar = e.srcElement || e.target;
+        if (tar.id != "searchText") {
+            if ($("#auto").is(":visible")) {
+                $("#auto").css("display", "none")
+            }
+        }
+    }
+});
+</script>
+
+
+
+		<script>
+			var bmobTool=(function(){
+				Bmob.initialize("39dfc34280e39b5411c3e450466da0f2", "4b59ff42a72875986c89551344a2b218");
+				var info=Bmob.Object.extend("test");
+			        var articleinfo=Bmob.Object.extend("articlelisttable");
+			         var userarticleorsite=Bmob.Object.extend("userarticleorsite");
+				var o={};
+				var lock=false,update=0,total=0;
+				o.maxPage=0;//提交锁，更新时间，结果数，最大页数
+				o.page=0;//当前页数
+
+				(function(obj){
+					var limit={}
+					obj.setLimit=function(x){
+						//设定条件时清除结果更新时间，结果数，最大页数，当前页数
+						limit=x;
+						update=0;
+						total=0;
+						obj.maxPage=0;
+						obj.page=0;
+					}
+					obj.getLimit=function(x){
+						return limit;
+					}
+				})(o)//设定/获取限制条件函数
+
+				var buildItem=function(object){
+					var tmpli,tmpa,dom1,dom2;
+					tmpli=document.createElement("li");
+					tmpa=document.createElement("a");
+					$(tmpa).attr("href",object.get("url")||"javascript:void(0);");
+					$(tmpa).attr("target","_blank");
+					dom1=document.createElement("h2");
+					$(dom1).text(object.get("name")||"站点未知");
+					$(tmpa).append(dom1);
+					dom1=document.createElement("p");
+					dom2=document.createElement("b");
+					$(dom2).text("网址:"+object.get("url"));
+					//$(dom2).text("作者:"+object.get("author"));
+					$(dom1).append(dom2);
+					$(tmpa).append(dom1);
+					//$(tmpa).append("<br>");
+					dom1=document.createElement("p");
+					$(dom1).text("关键词:");
+					$(tmpa).append(dom1);
+					for(var i=0;i<object.get("keyword").length;i++){
+						dom2=document.createElement("a")
+						dom2.onclick=function(){return false};
+						$(dom2).text(object.get("keyword")[i]).attr({'class':"ui-li-count"}).css({"position":"static","padding":".2em .5em"});
+						$(dom1).append(dom2);
+						$(dom2).bind("click",(function(k){return function(e){
+							e.stopPropagation();
+							o.setLimit({"keyword":[k]});
+							o.findweb();
+						}})(object.get("keyword")[i]));
+					}
+						dom3=document.createElement("a");
+						dom3.onclick=function()
+						{
+								var currentUser = Bmob.User.current();
+if (currentUser) {
+    // do stuff with the user
+     var  userdata={};userdata.userid=currentUser.id;
+				      	userdata.contentname=object.get("name");
+				      	userdata.recordtype="4";
+					userdata.articleurl=object.get("url");
+				      var useraddarticle=new	userarticleorsite();
+				      	useraddarticle.save(userdata, {
+						success:function(){  alert("收藏成功");;lock=false;},
+						error:function(){homeInfo("收藏失败");lock=false;}
+					});
+} else {
+   alert("请先登录");
+}
+						};
+						$(dom3).text("收藏");
+						$(dom1).append(dom3);;
+					dom1=document.createElement("p");
+					//$(dom1).attr("class","ui-li-aside");
+					$(dom1).text(object.updatedAt);
+					$(tmpa).append(dom1);
+					$(tmpli).append(tmpa);
+					return tmpli;
+				};//生成条目对象
+
+				var homeInfo=function(str){
+					var dom=document.createElement("li");
+					$(dom).text(str);
+					$("#homeInfo").append(dom);
+					$("#home").page();
+					$("#homeInfo").listview("refresh");
+					$.mobile.changePage("#home");
+				}//主页通知
+
+				var resultInfo=function(str){
+					var dom=document.createElement("li");
+					$(dom).text(str);
+					$("#resultInfo").append(dom);
+					$("#result").page();
+					$("#resultInfo").listview("refresh");
+					$.mobile.changePage("#result");
+				}//结果页通知
+
+				var showpage=function(){
+					$("#result h2").text("第"+(o.page+1)+"页，总计"+(o.maxPage+1)+"页，"+(total)+"条记录")
+					if(o.page==0){
+						$("#firstPage").attr("disabled","disabled");
+						$("#prevPage").attr("disabled","disabled");
+					}else{
+						$("#firstPage").removeAttr("disabled");
+						$("#prevPage").removeAttr("disabled");
+					}
+					if(o.page==o.maxPage){
+						$("#nextPage").attr("disabled","disabled");
+						$("#lastPage").attr("disabled","disabled");
+					}else{
+						$("#nextPage").removeAttr("disabled");
+						$("#lastPage").removeAttr("disabled");
+					}
+				};//结果页页码信息
+
+				o.addweb=function(){
+					if(lock)return;
+					lock=true;
+					var i;
+					//生成网站信息对象
+					var data={};
+					data.name=$("#add-name").val();
+					data.url="http://"+$("#add-url").val().replace(/.*\/\//,"");
+					tmpkey={};
+					$("input[type='checkbox'][name='add-keyword']:checked").each(function(){tmpkey[this.value.replace(/\s/g,"")]=1;});
+					$($("input[type='text'][name='add-keyword']").val().replace(/\s/g,"").split(",")).each(function(k,v){tmpkey[v]=1;});
+					data.keyword=[];
+					for(i in tmpkey)if(i!="")data.keyword.push(i);
+					tmpkey=null;
+					data.type=$("input[type='radio'][name='add-type']:checked").val()||""; 
+					data.author=$("#add-author").val();
+					data.email=$("#add-email").val();
+					//分享网站
+					var addweb = new info();
+					addweb.save(data, {
+						success:function(){homeInfo("分享成功");lock=false;},
+						error:function(){homeInfo("分享失败");lock=false;}
+					});
+						var currentUser = Bmob.User.current();
+if (currentUser) {
+    // do stuff with the user
+     var  userdata={};userdata.userid=currentUser.id;
+				      	userdata.contentname=$("#add-name").val();
+				      	userdata.recordtype="3";
+					userdata.articleurl="http://"+$("#add-url").val().replace(/.*\/\//,"");
+				      var useraddarticle=new	userarticleorsite();
+				      	useraddarticle.save(userdata, {
+						success:function(){homeInfo("分享成功");lock=false;},
+						error:function(){homeInfo("分享失败");lock=false;}
+					});
+} else {
+    // show the signup or login page
+}
+				}
+                                 o.addarticle=function(){
+					if(lock)return;
+					lock=true;
+					var i;
+					//生成网站信息对象
+					var articledata={};
+					articledata.articletitle=$("#add-articlename").val();
+					articledata.articleurl="http://"+$("#add-articleurl").val().replace(/.*\/\//,"");
+				
+					articledata.codelanguage=$("input[type='radio'][name='favoritecolor']:checked").val()||""; 
+				tmpkey=[];
+					articledata.articletype=[];
+				$("input[type='checkbox'][name='add-articlekeyword']:checked").each(function(){tmpkey[this.value.replace(/\s/g,"")]=1;});
+				for(j in tmpkey)if(j!="")articledata.articletype.push(j);
+			
+				
+				keyword=[];
+				articledata.keyword=[];
+					$($("input[type='text'][name='add-articlekeyword']").val().replace(/\s/g,"").split(",")).each(function(k,v){keyword[v]=1;});
+					for(i in keyword)if(i!="")articledata.keyword.push(i);
+				
+					tmpkey=null;
+					keyword=null;
+					//分享文章
+					var addarticle = new articleinfo();
+					addarticle.save(articledata, {
+						success:function(){homeInfo("分享成功");lock=false;},
+						error:function(){homeInfo("分享失败");lock=false;}
+					});
+					var currentUser = Bmob.User.current();
+if (currentUser) {
+    // do stuff with the user
+     var  userdata={};userdata.userid=currentUser.id;
+				      	userdata.contentname=$("#add-articlename").val();
+				      	userdata.recordtype="1";
+					userdata.articleurl="http://"+$("#add-articleurl").val().replace(/.*\/\//,"");
+				      var useraddarticle=new	userarticleorsite();
+				      	useraddarticle.save(userdata, {
+						success:function(){homeInfo("分享成功");lock=false;},
+						error:function(){homeInfo("分享失败");lock=false;}
+					});
+} else {
+    // show the signup or login page
+}
+				      
+				}
+				o.queryshareandfavorator=function(str)
+				{
+					var query = new Bmob.Query(userarticleorsite);
+query.equalTo("userid", str); 
+// 查询所有数据
+query.find({
+    success: function(results) {
+        alert("共查询到 " + results.length + " 条记录");
+        // 循环处理查询到的数据
+        for (var i = 0; i < results.length; i++) {
+        var object = results[i];
+        	var tmpli,tmpa,dom1,dom2;
+					tmpli=document.createElement("li");
+					tmpa=document.createElement("a");
+					$(tmpa).attr("href",object.get("articleurl")||"javascript:void(0);");
+					$(tmpa).attr("target","_blank");
+					dom1=document.createElement("h2");
+					$(dom1).text(object.get("contentname")||"站点未知");
+					$(tmpa).append(dom1);
+					//dom1=document.createElement("p");
+				//	dom2=document.createElement("b");
+				//	$(dom2).text("网址:"+object.get("articleurl"));
+					//$(dom2).text("作者:"+object.get("author"));
+				//	$(dom1).append(dom2);
+				//	$(tmpa).append(dom1);
+					//$(tmpa).append("<br>");
+				//	dom1=document.createElement("p");
+				//	$(dom1).text("关键词:");
+					$(tmpa).append(dom1);
+					$(tmpli).append(tmpa);
+					$("#shoucangarticleList").append(tmpli);
+      //  alert(object.id + ' - ' + object.get('playerName'));
+        }
+    },
+    error: function(error) {
+        alert("查询失败: " + error.code + " " + error.message);
+    }
+});
+				}
+				
+				o.findweb=function(){
+					//设定网站限制
+					var findquery = new Bmob.Query(info)
+					var limit=o.getLimit();
+					findquery.ascending("name");
+					if(typeof limit.type != "undefined"&& limit.type.length>0)findquery.containedIn("type", limit.type);
+					if(typeof limit.name!="undefined"&&limit.name!="")findquery.contains("name", limit.name);
+					if(typeof limit.keyword != "undefined"&&limit.keyword!="")findquery.containsAll("keyword", limit.keyword);
+					//超出30秒则更新结果数
+					var d = new Date()
+					if(d.getTime()-update>30*1000){
+						findquery.count({
+							success: function(count) {
+								total=count;
+								update=d.getTime();
+								o.maxPage=(count-count%8)/8;
+								showpage();
+							},
+							error: function(error) {
+								$("#firstPage").removeAttr("disabled");
+								$("#prevPage").removeAttr("disabled");
+								$("#nextPage").removeAttr("disabled");
+								$("#lastPage").removeAttr("disabled");
+							}
+						});
+					}else{
+						showpage();
+					}
+					//每页8条
+					findquery.limit(8);
+					findquery.skip(8*o.page);
+					//查找网页
+					var i;
+					findquery.find({
+						success: function(results) {
+							$("#resultList").empty();
+							for (i = 0; i < results.length; i++) {
+								$("#resultList").append(buildItem(results[i]));
+							}
+							$("#result").page();
+							$("#resultList").listview("refresh");
+						},
+						error: function(error) {
+							resultInfo("查找失败");
+						}
+					});
+					$.mobile.changePage("#result");
+				};
+				o.findarticle=function(){
+					//设定网站限制
+					var findquery = new Bmob.Query(articleinfo)
+					findquery.ascending("articletitle");
+			//	if(limit.codelanguage)findquery.equalTo("codelanguage", limit.codelanguage);
+					var limit=o.getLimit();
+					if(limit.articletype!=null)
+					{
+				        	findquery.containsAll("articletype", [limit.articletype]);
+					}
+					if(limit.codelanguage!=null)
+					{
+				        findquery.containsAll("codelanguage", [limit.codelanguage]);
+					}
+					//超出30秒则更新结果数
+					var i;
+					findquery.find({
+						success: function(results) {
+							$("#articleList").empty();
+							for (i = 0; i < results.length; i++) {
+								$("#articleList").append(buildArticleItem(results[i]));
+							}
+							$("#articlelit").page();
+							$("#articleList").listview("refresh");
+						},
+						error: function(error) {
+							resultInfo("查找失败");
+						}
+					});
+					$.mobile.changePage("#articlelit");
+				};
+			
+				var buildArticleItem=function(object){
+					var tmpli,tmpa,dom1,dom2;
+					tmpli=document.createElement("li");
+					tmpa=document.createElement("a");
+					$(tmpa).attr("href",object.get("articleurl")||"javascript:void(0);");
+					$(tmpa).attr("target","_blank");
+					dom1=document.createElement("h2");
+					$(dom1).text(object.get("articletitle")||"站点未知");
+					$(tmpa).append(dom1);
+					dom1=document.createElement("p");
+				//	dom2=document.createElement("b");
+				//	$(dom2).text("网址:"+object.get("articleurl"));
+					//$(dom2).text("作者:"+object.get("author"));
+				//	$(dom1).append(dom2);
+					$(tmpa).append(dom1);
+					//$(tmpa).append("<br>");
+					dom1=document.createElement("p");
+					$(dom1).text("关键词:");
+					$(tmpa).append(dom1);
+					if(object.get("keyword")!=undefined){
+						for(var i=0;i<object.get("keyword").length;i++){
+							dom2=document.createElement("a")
+							dom2.onclick=function(){return false};
+							$(dom2).text(object.get("keyword")[i]).attr({'class':"ui-li-count"}).css({"position":"static","padding":".2em .5em"});
+							$(dom1).append(dom2);;
+						}
+					}
+						dom3=document.createElement("a");
+						dom3.onclick=function()
+						{
+								var currentUser = Bmob.User.current();
+if (currentUser) {
+    // do stuff with the user
+     var  userdata={};userdata.userid=currentUser.id;
+				      	userdata.contentname=object.get("articletitle");
+				      	userdata.recordtype="2";
+					userdata.articleurl=object.get("articleurl");
+				      var useraddarticle=new	userarticleorsite();
+				      	useraddarticle.save(userdata, {
+						success:function(){  alert("收藏成功");;lock=false;},
+						error:function(){homeInfo("收藏失败");lock=false;}
+					});
+} else {
+   alert("请先登录");
+}
+						};
+						$(dom3).text("收藏");
+						$(dom1).append(dom3);;
+					//dom1=document.createElement("p");
+					//$(dom1).attr("class","ui-li-aside");
+					//$(dom1).text(object.updatedAt);
+				//	$(tmpa).append(dom1);
+					$(tmpli).append(tmpa);
+					return tmpli;
+				};//生成条目对象
+
+				//显示首页网站
+				o.listweb=function(){
+					var findquery = new Bmob.Query(info);
+					var i;
+					findquery.descending("updatedAt");
+					findquery.limit(3);
+					findquery.find({
+						success: function(results) {
+							$("#homeList").empty();
+							for (i = 0; i < results.length; i++) {
+								$("#homeList").append(buildItem(results[i]));
+							}
+							$("#home").page();
+							$("#homeList").listview("refresh");
+						},
+						error: function(error) {
+							homeInfo("查找失败");
+						}
+					});
+				}
+				return o;
+			})()
+		</script>
+		<title>程序员小站</title>
+	</head>
+	<body>
+		
+<!--首页-->
+
+        <div data-role="page" id="frequentlyuusedsites">
+            <div data-role="header" data-position="fixed"  >
+				<h1>程序员小站</h1>
+				<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+				<a href="#add" data-role="button" data-icon="plus" >分享网站</a>
+				<a href="#addarticle"   data-icon="plus"  data-role="button" >分享文章</a>
+				<a href="#registerpage" data-role="button"  data-icon="forward" >注册</a>
+				<a href="#loginpage" data-role="button"  data-icon="star" >登陆</a>
+				</div>
+			</div>
+              <div data-role="content">
+              	<div class="ui-grid-solo">
+  <div class="ui-block-a">  <input style="min-width:300px;"  type="text" name="wd" id="Text1" autocomplete="off"  /></div>
+</div>
+                  <div class="ui-grid-g" style="border:0px; width: 100%; text-align: center;" >
+                    
+                      <div class="ui-block-a" style="border: 0px;float:none;display:inline-block;">  <input type="submit" onclick="baidu()" value="百度"></div>
+     <div class="ui-block-b" style="border: 0px;float:none;display:inline-block;">  <input type="submit"  onclick="sougou()"  value="搜狗"></div>
+     <div class="ui-block-c" style="border: 0px;float:none;display:inline-block; ">  <input type="submit"  onclick="bing()"  value="bing"></div>
+     <div class="ui-block-d" style="border: 0px;float:none;display:inline-block; ">  <input type="submit"  onclick="google()"  value="google"></div>
+   <div class="ui-block-d" style="border: 0px;float:none;display:inline-block; ">  <input type="submit"  onclick="googlechina()"  value="google中国"></div>
+      <div class="ui-block-d" style="border: 0px;float:none;display:inline-block; ">  <input type="submit"  onclick="three360()"  value="360"></div>
+
+     </div><div style="clear:both"></div><br>
+                        <ul data-role="listview">
+                            <li><a href="http://163.com/">网易</a></li>
+                            <li><a href="http://qq.com/">qq</a></li>
+                            <li><a href="http://www.ifeng.com//">凤凰网</a></li>
+                             <li><a href="http://wap.ithome.com/">ithome</a></li>
+                            <li><a href="http://m.cnblogs.com/">博客园</a></li>
+                            <li><a href="http://m.csdn.net/">csdn</a></li>
+                            <li><a href="http://m.oschina.net/">开源中国</a></li>
+                            <li><a href="http://www.chinaunix.net/">chinaunix</a></li>
+                            <li><a href="http://www.infoq.com/cn/">infoq</a></li>                                                          
+                            <li><a href="http://www.lupaworld.com/portal.php">lupaworld</a></li>
+                            <li><a href="http://51cto.com/">51cto</a></li>
+                            <li><a href="http://www.tuicool.com/ah">推酷</a></li>                                                          
+                            <li><a href="http://api.jquery.com/category/version/1.9/">jquery api</a></li>
+                            <li><a href="http://stackoverflow.com/">stackoverflow</a></li>
+                            <li><a href="http://news.html5cn.org/">html5cn</a></li>
+                            <li><a href="http://www.apkbus.com/news1/eyes/">apkbus news</a></li>
+                            <li><a href="https://github.com/blog/category/all">github blog</a></li>
+                            <li><a href="http://api.jquery.com/category/version/1.9/">jquery api</a></li>                           
+                        </ul>           
+                    </div>
+            
+			<div data-role="footer" data-position="fixed" >
+				<div data-role="navbar">
+					<ul>
+                        <li><a href="#frequentlyuusedsites" data-icon="home" >常用</a></li>
+                         <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
+						<li><a href="#home" data-icon="home" >网站</a></li>
+						<li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
+                           
+                      	<li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
+					</ul>
+				</div>
+			</div>
+        </div>
+		<div data-role="page" id="home" >
+			<div data-role="header" data-position="fixed"  >
+				<h1>程序员小站</h1>
+					<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+				<a href="#add" data-role="button" data-icon="plus" >分享网站</a>
+				<a href="#addarticle"   data-icon="plus"  data-role="button" >分享文章</a>
+				<a href="#registerpage" data-role="button"  data-icon="forward" >注册</a>
+				<a href="#loginpage" data-role="button"  data-icon="star" >登陆</a>
+					
+				</div>
+			
+			</div>
+
+                 
+			<div data-role="content">
+   
+			<div class="ui-grid-solo">
+  <div class="ui-block-a">  <input style="min-width:300px;"  type="text" name="wd" id="Text1" autocomplete="off"  /></div>
+</div>
+                  <div class="ui-grid-e" style="border:0px; width: 100%; text-align: center;" >
+                    
+                      <div class="ui-block-a" style="border: 0px;float:none;display:inline-block;">  <input type="submit" onclick="baidu()" value="百度"></div>
+     <div class="ui-block-b" style="border: 0px;float:none;display:inline-block;">  <input type="submit"  onclick="sougou()"  value="搜狗"></div>
+     <div class="ui-block-c" style="border: 0px;float:none;display:inline-block; ">  <input type="submit"  onclick="bing()"  value="bing"></div>
+     <div class="ui-block-d" style="border: 0px;float:none;display:inline-block; ">  <input type="submit"  onclick="google()"  value="google"></div>
+   <div class="ui-block-d" style="border: 0px;float:none;display:inline-block; ">  <input type="submit"  onclick="googlechina()"  value="google中国"></div>
+      <div class="ui-block-d" style="border: 0px;float:none;display:inline-block; ">  <input type="submit"  onclick="three360()"  value="360"></div>
+     </div><div style="clear:both"></div><br>
+               
+                 
+              
+				<ul data-role="listview" data-inset="true" id="homeInfo"></ul>
+				
+				<div data-role="collapsible" data-collapsed="false" >
+					<h4>最新</h4>
+					<ul data-role="listview" data-inset="false" id="homeList">
+					</ul>
+				</div>
+				<button id="moreweb">更多站点</button>
+			</div>
+
+		<div data-role="footer" data-position="fixed" >
+				<div data-role="navbar">
+					<ul>
+                        <li><a href="#frequentlyuusedsites" data-icon="home" >常用</a></li>
+                         <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
+						<li><a href="#home" data-icon="home" >网站</a></li>
+						<li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
+                           
+                      	<li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
+					</ul>
+				</div>
+			</div>
+		</div> 
+		<script>
+			$(document).on("pagebeforeshow","#home",bmobTool.listweb);
+			$("#moreweb").bind("click",function(){
+				bmobTool.setLimit({});
+				bmobTool.findweb();
+			});
+		</script>
+<!--结果页-->
+		<div data-role="page" id="result">
+			<div data-role="header" data-position="fixed" >
+				<h1>程序员小站</h1>
+				<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+				<a href="#add" data-role="button" data-icon="plus" >分享网站</a>
+				<a href="#addarticle"   data-icon="plus"   data-role="button">分享文章</a>
+				<a href="#registerpage" data-role="button"  data-icon="forward" >注册</a>
+				<a href="#loginpage" data-role="button"  data-icon="star" >登陆</a>
+				
+				</div>
+			</div>
+
+			<div data-role="content">
+				<h2></h2>
+				<ul data-role="listview" data-inset="true" id="resultInfo"></ul>
+				<ul data-role="listview" data-inset="true" id="resultList"></ul>
+				<div data-role="navbar">
+					<ul>
+						<li><button data-icon="arrow-l" id="firstPage">首页</button></li>
+						<li><button data-icon="arrow-l" id="prevPage">上一页</button></li>
+						<li><button data-icon="arrow-r" id="nextPage">下一页</button></li>
+						<li><button data-icon="arrow-r" id="lastPage">末页</button></li>
+					</ul>
+				</div>
+
+			</div>
+
+		<div data-role="footer" data-position="fixed" >
+				<div data-role="navbar">
+					<ul>
+                        <li><a href="#frequentlyuusedsites" data-icon="home" >常用</a></li>
+                         <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
+						<li><a href="#home" data-icon="home" >网站</a></li>
+						<li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
+                           
+                      	<li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
+					</ul>
+				</div>
+			</div>
+		</div> 
+		<script>
+			$("#firstPage").bind("click",function(){
+				if(bmobTool.page>0){
+					bmobTool.page=0;
+					bmobTool.findweb();
+				}
+			});
+			$("#prevPage").bind("click",function(){
+				if(bmobTool.page>0){
+					bmobTool.page-=1;
+					bmobTool.findweb();
+				}
+			});
+			$("#nextPage").bind("click",function(){
+				if(bmobTool.page<bmobTool.maxPage){
+					bmobTool.page+=1;
+					bmobTool.findweb();
+				}
+			});
+			$("#lastPage").bind("click",function(){
+				if(bmobTool.page<bmobTool.maxPage){
+					bmobTool.page=bmobTool.maxPage;
+					bmobTool.findweb();
+				}
+			});
+		</script>
+		
+<!--页-->
+		<div data-role="page" id="addarticle">
+			<div data-role="header" data-position="fixed" >
+				<h1>程序员小站</h1>
+				<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+				<a href="#add" data-role="button" data-icon="plus" >分享网站</a>
+				<a href="#addarticle"   data-icon="plus"  data-role="button" >分享文章</a>
+				<a href="#registerpage" data-role="button"  data-icon="forward" >注册</a>
+				<a href="#loginpage" data-role="button"  data-icon="star" >登陆</a>
+				
+				</div>
+			</div>
+			<div data-role="content">
+				<div data-role="fieldcontain">
+					<label for="add-articleurl">网址(*)：</label>
+					<input type="text" name="add-articleurl" id="add-articleurl">
+				</div>
+				<div data-role="fieldcontain">
+					<label for="add-articlename">标题：</label>
+					<input type="text" name="add-articlename" id="add-articlename">
+				</div>
+				<div data-role="fieldcontain">
+					<fieldset data-role="controlgroup" data-type="horizontal">
+						<legend>关键词(*)：</legend>
+							<label for="add-key-articlefrontend">软件</label>
+							<input type="checkbox" name="add-articlekeyword" id="add-key-articlefrontend" value="软件">
+							<label for="add-key-articlebackend">硬件</label>
+							<input type="checkbox" name="add-articlekeyword" id="add-key-articlebackend" value="硬件">
+					</fieldset>
+					<label for="add-keyword"  class=""></label>
+					<input type="text" name="add-articlekeyword" id="add-key-other" value="" placeholder="其他关键词，以英文逗号分割...">
+				</div>
+				<div data-role="fieldcontain">
+ <fieldset data-role="controlgroup" data-type="horizontal">  
+                <legend>语言:</legend>  
+  
+                <input type="radio" name="favoritecolor" id="favoritecolora1" value="c#">  
+                <label for="favoritecolora1">c#</label>   
+  
+                <input type="radio" name="favoritecolor" id="favoritecolora2" value="java">  
+                <label for="favoritecolora2">java</label>   
+  
+                <input type="radio" name="favoritecolor" id="favoritecolora3" value="c++">  
+                <label for="favoritecolora3">c++</label>   
+  <input type="radio" name="favoritecolor" id="favoritecolora4" value="oc">  
+                <label for="favoritecolora4">oc</label>   
+  <input type="radio" name="favoritecolor" id="favoritecolora5" value="c">  
+                <label for="favoritecolora5">c</label>   
+  <input type="radio" name="favoritecolor" id="favoritecolora6" value="python">  
+                <label for="favoritecolora6">python</label>   
+  <input type="radio" name="favoritecolor" id="favoritecolora7" value="php">  
+                <label for="favoritecolora7">php</label>   
+  <input type="radio" name="favoritecolor" id="favoritecolora8" value="javascript">  
+                <label for="favoritecolora8">javascript</label>   
+  <input type="radio" name="favoritecolor" id="favoritecolora9" value="sql">  
+                <label for="favoritecolora9">sql</label>   
+  <input type="radio" name="favoritecolor" id="favoritecolora10" value="vb">  
+                <label for="favoritecolora10">vb</label>   
+  <input type="radio" name="favoritecolor" id="favoritecolora11" value="ruby">  
+                <label for="favoritecolora11">ruby</label>   
+  
+            </fieldset>  
+				</div>
+				
+				<button id="addarticlebtn">添加文章</button>
+			</div>
+		<div data-role="footer" data-position="fixed" >
+				<div data-role="navbar">
+					<ul>
+                        <li><a href="#frequentlyuusedsites" data-icon="home" >常用</a></li>
+                         <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
+						<li><a href="#home" data-icon="home" >网站</a></li>
+						<li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
+                           
+                      	<li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
+					</ul>
+				</div>
+			</div>
+			</div>
+		</div> 
+		<script>
+			$("#addarticlebtn").bind("click",function(){
+				bmobTool.addarticle();
+			});
+		</script>
+
+<!--搜索页-->
+
+		<div data-role="page" id="add">
+			<div data-role="header" data-position="fixed" >
+				<h1>程序员小站</h1>
+				<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+				<a href="#add" data-role="button" data-icon="plus" >分享网站</a>
+				<a href="#addarticle"   data-icon="plus"  data-role="button" >分享文章</a>
+				<a href="#registerpage" data-role="button"  data-icon="forward" >注册</a>
+				<a href="#loginpage" data-role="button"  data-icon="star" >登陆</a>
+				
+				</div>
+			</div>
+			<div data-role="content">
+				<div data-role="fieldcontain">
+					<label for="add-url">网址(*)：</label>
+					<input type="text" name="add-url" id="add-url">
+				</div>
+				<div data-role="fieldcontain">
+					<label for="add-name">名称：</label>
+					<input type="text" name="add-name" id="add-name">
+				</div>
+				<div data-role="fieldcontain">
+					<fieldset data-role="controlgroup" data-type="horizontal">
+						<legend>关键词(*)：</legend>
+							<label for="add-key-frontend">前端</label>
+							<input type="checkbox" name="add-keyword" id="add-key-frontend" value="前端">
+							<label for="add-key-backend">后端</label>
+							<input type="checkbox" name="add-keyword" id="add-key-backend" value="后端">
+					</fieldset>
+					<label for="add-keyword"  class=""></label>
+					<input type="text" name="add-keyword" id="add-key-other" value="" placeholder="其他关键词，以英文逗号分割...">
+				</div>
+				<div data-role="fieldcontain">
+					<fieldset data-role="controlgroup" data-type="horizontal">
+						<legend>类型：</legend>
+							<label for="add-site">网站</label>
+							<input type="radio" name="add-type" id="add-site" value="site" checked>
+							<label for="add-blog">博客</label>
+							<input type="radio" name="add-type" id="add-blog" value="blog">	
+					</fieldset>
+				</div>
+				<div data-role="fieldcontain">
+					<label for="add-author">作者：</label>
+					<input type="text" name="add-author" id="add-author">
+				</div>
+				<div data-role="fieldcontain">
+					<label for="add-email">邮箱：</label>
+					<input type="text" name="add-email" id="add-email">
+				</div>
+				<button id="addweb">分享</button>
+			</div>
+		<div data-role="footer" data-position="fixed" >
+				<div data-role="navbar">
+					<ul>
+                        <li><a href="#frequentlyuusedsites" data-icon="home" >常用</a></li>
+                         <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
+						<li><a href="#home" data-icon="home" >网站</a></li>
+						<li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
+                           
+                      	<li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+			<script>
+			$("#addweb").bind("click",function(){
+				bmobTool.addweb();
+			});
+		</script>
+		<div data-role="page" id="search">
+			<div data-role="header" data-position="fixed" >
+				<h1>程序员小站</h1>
+				<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+				<a href="#add" data-role="button" data-icon="plus" >分享网站</a>
+				<a href="#addarticle"   data-icon="plus"   data-role="button">分享文章</a>
+				<a href="#registerpage" data-role="button"  data-icon="forward" >注册</a>
+				<a href="#loginpage" data-role="button"  data-icon="star" >登陆</a>
+				
+				</div>
+			</div>
+
+			<div data-role="content">
+					
+				<div data-role="fieldcontain">
+					<label for="search-name">名称：</label>
+					<input type="text" name="search-name" id="search-name">
+				</div>
+				
+				<div data-role="fieldcontain">
+					<label for="search-keyword">关键词：</label>
+					<input type="text" name="search-keyword" id="search-keyword">
+				</div>
+
+				<div data-role="fieldcontain">
+					<fieldset data-role="controlgroup" data-type="horizontal">
+						<legend>类型：</legend>
+							<label for="search-site">网站</label>
+							<input type="checkbox" name="search-type" id="search-site" value="site">
+							<label for="search-blog">博客</label>
+							<input type="checkbox" name="search-type" id="search-blog" value="blog">	
+					</fieldset>
+				</div>
+
+				<button id="searchweb">搜索</button>
+
+			</div>
+
+		<div data-role="footer" data-position="fixed" >
+				<div data-role="navbar">
+					<ul>
+                        <li><a href="#frequentlyuusedsites" data-icon="home" >常用</a></li>
+                         <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
+						<li><a href="#home" data-icon="home" >网站</a></li>
+						<li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
+                           
+                      	<li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
+					</ul>
+				</div>
+			</div>
+		</div> 
+		<script>
+			$("#searchweb").bind("click",function(){
+				var data={};
+				data.name=$("#search-name").val();
+				data.keyword=$("#search-keyword").val().replace(/[\s,]+/g,",").replace(/^,(.*),$/g,"$1").split(",");
+				data.type=[];
+				$("input[type='checkbox'][name='search-type']:checked").each(function(){data.type.push(this.value);});
+				bmobTool.setLimit(data);
+				bmobTool.findweb();
+			});
+		</script>
+		
+<!--关于-->
+
+		<div data-role="page" id="about">
+			<div data-role="header" data-position="fixed" >
+				<h1>程序员小站</h1>
+				<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+				<a href="#add" data-role="button" data-icon="plus" >分享网站</a>
+				<a href="#addarticle"   data-icon="plus"   data-role="button">分享文章</a>
+				<a href="#registerpage" data-role="button"  data-icon="forward" >注册</a>
+				<a href="#loginpage" data-role="button"  data-icon="star" >登陆</a>
+				
+				</div>
+			</div>
+
+			<div data-role="content">
+				  <ul data-role="listview">
+                    <li><a href="http://tieba.baidu.com/f?ie=utf-8&kw=%E7%A8%8B%E5%BA%8F%E5%91%98">程序员吧</a></li>
+                    <li><a href="http://tieba.baidu.com/f?ie=utf-8&kw=java">java吧</a></li>
+                    <li><a href="http://www.v2ex.com/">v2ex</a></li>
+                    <li><a href="http://wap.ithome.com/">ithome</a></li>
+                    <li><a href="http://ing.cnblogs.com/mobile/home/">博客园闪存</a></li>
+                    <li><a href="http://tieba.baidu.com/f?kw=c%23">c#吧</a></li>
+                    <li><a href="http://tieba.baidu.com/f?ie=utf-8&kw=%E7%AE%97%E6%B3%95">算法吧</a></li>
+                    <li><a href="http://tieba.baidu.com/f?kw=c%2B%2B">c++吧</a></li>
+                    <li><a href="http://tieba.baidu.com/f?kw=%B1%E0%B3%CC">编程吧</a></li>                 
+                    <li><a href="http://stackoverflow.com/">stackoverflow</a></li>
+                    <li><a href="http://news.html5cn.org/">html5cn</a></li>
+                    <li><a href="http://www.apkbus.com/news1/eyes/">apkbus news</a></li>                    
+                </ul>         
+						<h2>qq群:425071394</h2>
+					<a href="http://gisdaodao.github.io/itsites/ViewPagerbroswer.apk"  data-role="button">点击下载android 客户端</a>
+					<div class="jiathis_style_32x32">
+						<a class="jiathis_button_qzone"></a>
+						<a class="jiathis_button_tsina" ></a>
+						<a class="jiathis_button_tqq" ></a>
+						<a class="jiathis_button_weixin" ></a>
+						<a class="jiathis_button_renren" ></a>
+						<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+						<a class="jiathis_counter_style" ></a>
+					</div>
+					<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+			</div>
+
+		<div data-role="footer" data-position="fixed" >
+				<div data-role="navbar">
+					<ul>
+                        <li><a href="#frequentlyuusedsites" data-icon="home" >常用</a></li>
+                         <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
+						<li><a href="#home" data-icon="home" >网站</a></li>
+						<li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
+                           
+                      	<li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
+					</ul>
+				</div>
+			</div>
+		</div> 
+        <div data-role="page" id="doconline">
+			<div data-role="header" data-position="fixed" >
+				<h1>程序员小站</h1>
+				<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+				<a href="#add" data-role="button" data-icon="plus" >分享网站</a>
+				<a href="#addarticle"   data-icon="plus"  data-role="button" >分享文章</a>
+				<a href="#registerpage" data-role="button"  data-icon="forward" >注册</a>
+				<a href="#loginpage" data-role="button"  data-icon="star" >登陆</a>
+				
+				</div>
+			</div>
+
+			<div data-role="content">
+                                <a href="http://docs.oracle.com/javase/8/docs/api/" data-role="button">java</a>
+                                <a href="http://www.cplusplus.com/reference/" data-role="button"">c++</a>
+                                <a href="http://www.gnu.org/software/gnu-c-manual/gnu-c-manual.html" data-role="button">c</a>
+                                <a href="https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx" data-role="button">c#</a>
+                                <a href="http://www.w3schools.com/html/default.asp" data-role="button">HTML5</a>
+                                <a href="http://www.w3schools.com/css/default.asp" data-role="button">CSS</a>
+                                <a href="http://www.w3schools.com/js/default.asp" data-role="button">javascript</a>
+                                <a href="http://www.w3schools.com/sql/default.asp" data-role="button">SQL</a>
+                                <a href="https://secure.php.net/manual/en/index.php" data-role="button">PHP</a>
+			</div>
+
+				<div data-role="footer" data-position="fixed" >
+				<div data-role="navbar">
+					<ul>
+                        <li><a href="#frequentlyuusedsites" data-icon="home" >常用</a></li>
+                         <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
+						<li><a href="#home" data-icon="home" >网站</a></li>
+						<li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
+                           
+                      	<li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
+					</ul>
+				</div>
+			</div>
+		</div> 
+        <div data-role="page" id="speech">
+            <div data-role="header" data-position="fixed"  >
+				<h1>程序员小站</h1>
+				<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+				<a href="#add" data-role="button" data-icon="plus" >分享网站</a>
+				<a href="#addarticle"   data-icon="plus"  data-role="button" >分享文章</a>
+				<a href="#registerpage" data-role="button"  data-icon="forward" >注册</a>
+				<a href="#loginpage" data-role="button"  data-icon="star" >登陆</a>
+				
+				</div>
+			</div>
+              <div data-role="content">
+             
+                        <ul data-role="listview">
+                             <li><a href="http://gisdaodao.github.io/itsites/lecture/20151024扎克伯格清华中文演讲.html">20151024扎克伯格清华中文演讲</a></li>                                                     
+                            <li><a href="http://gisdaodao.github.io/itsites/lecture/20150518库克在美国乔治华盛顿大学发表了演讲.html">20150518库克在美国乔治华盛顿大学发表了演讲</a></li>
+                              <li><a href="http://edu.sina.com.cn/en/2015-01-21/180787227.shtml">2014经典演讲之比尔盖茨斯坦福演讲(双语)</a></li>
+                              <li><a href="#articlelit" data-icon="info" data-transition="slide">文章列表</a></li>
+                        </ul>           
+                    </div>
+            
+		<div data-role="footer" data-position="fixed" >
+				<div data-role="navbar">
+					<ul>
+                        <li><a href="#frequentlyuusedsites" data-icon="home" >常用</a></li>
+                         <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
+						<li><a href="#home" data-icon="home" >网站</a></li>
+						<li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
+                           
+                      	<li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
+					</ul>
+				</div>
+			</div>
+        </div>
+ <div data-role="page" id="articlelit">
+        <div data-role="header" data-position="fixed">
+            <h1>程序员小站</h1>
+         	<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+				<a href="#add" data-role="button" data-icon="plus" >分享网站</a>
+				<a href="#addarticle"   data-icon="plus"  data-role="button" >分享文章</a>
+				<a href="#registerpage" data-role="button"  data-icon="forward" >注册</a>
+				<a href="#loginpage" data-role="button"  data-icon="star" >登陆</a>
+				
+				</div>
+        </div>
+        <div data-role="content">
+            <div class="ui-grid-a">
+                <div class="ui-block-a">  <input type="button" value="软件" onclick="findSoft()"></div>
+                <div class="ui-block-b">  <input type="button" value="硬件" onclick="findHard()"></div>
+            </div>
+            <div data-role="collapsible">
+                <h5>语言</h5>
+                <fieldset data-role="controlgroup" data-type="horizontal" id="favoritecolor1">
+
+                    <input type="radio" name="favoritecolor1" id="favoritecolora1" value="c#">
+                    <label for="favoritecolora1">c#</label>
+                    <input type="radio" name="favoritecolor1" id="favoritecolora2" value="java">
+                    <label for="favoritecolora2">java</label>
+                    <input type="radio" name="favoritecolor1" id="favoritecolora3" value="c++">
+                    <label for="favoritecolora3">c++</label>
+                    <input type="radio" name="favoritecolor1" id="favoritecolora4" value="oc">
+                    <label for="favoritecolora4">oc</label>
+                    <input type="radio" name="favoritecolor1" id="favoritecolora5" value="c">
+                    <label for="favoritecolora5">c</label>
+                    <input type="radio" name="favoritecolor1" id="favoritecolora6" value="python">
+                    <label for="favoritecolora6">python</label>
+                    <input type="radio" name="favoritecolor1" id="favoritecolora7" value="php">
+                    <label for="favoritecolora7">php</label>
+                    <input type="radio" name="favoritecolor1" id="favoritecolora8" value="javascript">
+                    <label for="favoritecolora8">javascript</label>
+                    <input type="radio" name="favoritecolor1" id="favoritecolora9" value="sql">
+                    <label for="favoritecolora9">sql</label>
+                    <input type="radio" name="favoritecolor1" id="favoritecolora10" value="vb">
+                    <label for="favoritecolora10">vb</label>
+                    <input type="radio" name="favoritecolor1" id="favoritecolora11" value="ruby">
+                    <label for="favoritecolora11">ruby</label>
+
+                </fieldset>
+            </div>
+            <ul data-role="listview" data-inset="true" id="articleList"></ul>
+        </div>
+       	<div data-role="footer" data-position="fixed" >
+				<div data-role="navbar">
+					<ul>
+                        <li><a href="#frequentlyuusedsites" data-icon="home" >常用</a></li>
+                         <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
+						<li><a href="#home" data-icon="home" >网站</a></li>
+						<li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
+                           
+                      	<li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
+					</ul>
+				</div>
+			</div>
+    </div> 
+    <script>
+    function findSoft(){
+				var data={};
+				data.articletype="软件"
+				if($('#favoritecolor1 .ui-radio-on').text()!="")data.codelanguage=$('#favoritecolor1 .ui-radio-on').text();
+				bmobTool.setLimit(data);
+				bmobTool.findarticle();
+			}
+	function findHard(){
+				var data={};
+				data.articletype="硬件"
+				bmobTool.setLimit(data);
+				bmobTool.findarticle();
+			}
+		
+ $("input[type='radio'][name='favoritecolor1']").bind("change",function(event,ui){
+                         	var codedata={};
+				if($('#favoritecolor1 .ui-radio-on').text()!="")
+				codedata.codelanguage=$('#favoritecolor1 .ui-radio-on').text();
+				bmobTool.setLimit(codedata);
+				bmobTool.findarticle();
+ });
+ $(document).on("pageinit","#articlelit",function(){
+	var data={};
+				data.articletype="软件"
+				if($('#favoritecolor1 .ui-radio-on').text()!="")data.codelanguage=$('#favoritecolor1 .ui-radio-on').text();
+				bmobTool.setLimit(data);
+				bmobTool.findarticle();
+});
+    </script>
+     <div data-role="page" id="loginpage">
+            <div data-role="header" data-position="fixed"  >
+				<h1>程序员小站-登录</h1>
+				<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+				<a href="#add" data-role="button" data-icon="plus" >分享网站</a>
+				<a href="#addarticle"   data-icon="plus"   data-role="button">分享文章</a>
+				<a href="#registerpage" data-role="button"  data-icon="forward" >注册</a>
+				<a href="#loginpage" data-role="button"  data-icon="star" >登陆</a>
+				
+				</div>
+			</div>
+              <div data-role="content">
+             <div data-role="fieldcontain" >
+					<label for="user-loginname">用户名：</label>
+					<input type="text" name="user-loginname" id="user-loginname">
+				</div>
+				
+				<div data-role="fieldcontain">
+					<label for="user-loginpasswordword">密码：</label>
+					<input type="text" name="user-loginpasswordword" id="user-loginpasswordword">
+				</div>
+                      <button id="loginbtn" onclick="Login()">登录</button>
+                     
+                      	<div  class="ui-grid-c">
+                      	     <div class="ui-block-a"> <input type="button"  value="收藏的文章" onclick=""></input>	 </div>
+                      	     <div class="ui-block-b">  <input type="button"  value="分享/发表的文章" onclick=""></input>	 </div>
+                      	       <div class="ui-block-c"> <input type="button"  value="收藏的网站" onclick=""></input>	 </div>
+                      	       <div class="ui-block-d">  <input type="button"  value="收藏/创建的网站" onclick=""></input>	 </div>
+                      	 </div>
+                      	  <ul data-role="listview" data-inset="true" id="shoucangarticleList"></ul>
+                      
+                    </div>
+            
+		<div data-role="footer" data-position="fixed" >
+				<div data-role="navbar">
+					<ul>
+                        <li><a href="#frequentlyuusedsites" data-icon="home" >常用</a></li>
+                         <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
+						<li><a href="#home" data-icon="home" >网站</a></li>
+						<li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
+                           
+                      	<li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
+					</ul>
+				</div>
+			</div>
+        </div>
+        <script>
+        $(document).on("pageinit","#loginpage",function(){
+var currentUser = Bmob.User.current();
+if (currentUser) {
+bmobTool.queryshareandfavorator(currentUser.id);
+  }
+  else
+  {
+  }
+   // 此处是 jQuery 事件...
+//bmobTool.queryshareandfavorator();
+});
+        function 	Login(){
+    	Bmob.initialize("39dfc34280e39b5411c3e450466da0f2", "4b59ff42a72875986c89551344a2b218");
+var user = new Bmob.User();
+var username=$("#user-loginname").val();
+var password=$("#user-loginpasswordword").val();
+Bmob.User.logIn(username,password, {
+  success: function(user) {
+    alert("登陆成功");
+  },
+  error: function(user, error) {
+      alert("登陆失败");
+  }
+});
+	}
+        </script>
+               <div data-role="page" id="registerpage">
+            <div data-role="header" data-position="fixed"  >
+				<h1>程序员小站-注册</h1>
+				<div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+				<a href="#add" data-role="button" data-icon="plus" >分享网站</a>
+				<a href="#addarticle"   data-icon="plus"   data-role="button">分享文章</a>
+				<a href="#registerpage" data-role="button"  data-icon="forward" >注册</a>
+				<a href="#loginpage" data-role="button"  data-icon="star" >登陆</a>
+				
+				</div>
+			</div>
+              <div data-role="content">
+             <div data-role="fieldcontain">
+					<label for="user-registername">用户名：</label>
+					<input type="text" name="user-registername" id="user-registername">
+				</div>
+				
+				<div data-role="fieldcontain">
+					<label for="user-registerkeyword">密码：</label>
+					<input type="text" name="user-registerpasswordword" id="user-registerpasswordword">
+				</div>
+                      <input type="button" id="registerbtn"  value="注册" onclick="Register()"></input>
+                      
+                    </div>
+            
+		<div data-role="footer" data-position="fixed" >
+				<div data-role="navbar">
+					<ul>
+                        <li><a href="#frequentlyuusedsites" data-icon="home" >常用</a></li>
+                         <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
+						<li><a href="#home" data-icon="home" >网站</a></li>
+						<li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
+                           
+                      	<li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
+					</ul>
+				</div>
+			</div>
+        </div>     
+			
+	<script>
+	function Register(){
+	Bmob.initialize("39dfc34280e39b5411c3e450466da0f2", "4b59ff42a72875986c89551344a2b218");
+var user = new Bmob.User();
+var username=$("#user-registername").val();
+var password=$("#user-registerpasswordword").val();
+user.set("username", username);
+user.set("password", password);
+user.signUp(null, {
+  success: function(user) {
+      alert("注册成功");
+  },
+  error: function(user, error) {
+    // Show the error message somewhere and let the user try again.
+    alert("Error: " + error.code + " " + error.message);
+  }
+});
+}
+	
+	
+var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256749878'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256749878' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	
+	</body>
+	</html>
