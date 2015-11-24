@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
@@ -258,8 +257,6 @@ $(function () {
     }
 });
     </script>
-
-
 
     <script>
 			var bmobTool=(function(){
@@ -666,15 +663,13 @@ if (currentUser) {
 				return o;
 			})()
     </script>
-    <title>程序员小站</title>
+    <title>网上书签</title>
 </head>
 <body>
-
     <!--首页-->
-
     <div data-role="page" id="frequentlyuusedsites">
         <div data-role="header" data-position="fixed">
-            <h1>程序员小站</h1>
+            <h1>今明书签</h1>
             <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
                 <a href="#add" data-role="button" data-icon="plus">分享网站</a>
                 <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
@@ -687,14 +682,12 @@ if (currentUser) {
                 <div class="ui-block-a">  <input style="min-width:300px;" type="text" name="wd" id="Text1" autocomplete="off" /></div>
             </div>
             <div class="ui-grid-g" style="border:0px; width: 100%; text-align: center;">
-
                 <div class="ui-block-a" style="border: 0px;float:none;display:inline-block;">  <input type="submit" onclick="baidu()" value="百度"></div>
                 <div class="ui-block-b" style="border: 0px;float:none;display:inline-block;">  <input type="submit" onclick="sougou()" value="搜狗"></div>
                 <div class="ui-block-c" style="border: 0px;float:none;display:inline-block; ">  <input type="submit" onclick="bing()" value="bing"></div>
                 <div class="ui-block-d" style="border: 0px;float:none;display:inline-block; ">  <input type="submit" onclick="google()" value="google"></div>
                 <div class="ui-block-d" style="border: 0px;float:none;display:inline-block; ">  <input type="submit" onclick="googlechina()" value="google中国"></div>
                 <div class="ui-block-d" style="border: 0px;float:none;display:inline-block; ">  <input type="submit" onclick="three360()" value="360"></div>
-
             </div><div style="clear:both"></div><br>
             <ul data-role="listview">
                 <li><a href="http://163.com/">网易</a></li>
@@ -717,7 +710,6 @@ if (currentUser) {
                 <li><a href="http://api.jquery.com/category/version/1.9/">jquery api</a></li>
             </ul>
         </div>
-
         <div data-role="footer" data-position="fixed">
             <div data-role="navbar">
                 <ul>
@@ -725,7 +717,6 @@ if (currentUser) {
                     <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
                     <li><a href="#home" data-icon="home">网站</a></li>
                     <li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
-
                     <li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
                 </ul>
             </div>
@@ -733,25 +724,20 @@ if (currentUser) {
     </div>
     <div data-role="page" id="home">
         <div data-role="header" data-position="fixed">
-            <h1>程序员小站</h1>
+            <h1>今明书签</h1>
             <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
                 <a href="#add" data-role="button" data-icon="plus">分享网站</a>
                 <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
                 <a href="#registerpage" data-role="button" data-icon="forward">注册</a>
                 <a href="#loginpage" data-role="button" data-icon="star">登陆</a>
-
             </div>
-
         </div>
 
-
         <div data-role="content">
-
             <div class="ui-grid-solo">
                 <div class="ui-block-a">  <input style="min-width:300px;" type="text" name="wd" id="Text1" autocomplete="off" /></div>
             </div>
             <div class="ui-grid-e" style="border:0px; width: 100%; text-align: center;">
-
                 <div class="ui-block-a" style="border: 0px;float:none;display:inline-block;">  <input type="submit" onclick="baidu()" value="百度"></div>
                 <div class="ui-block-b" style="border: 0px;float:none;display:inline-block;">  <input type="submit" onclick="sougou()" value="搜狗"></div>
                 <div class="ui-block-c" style="border: 0px;float:none;display:inline-block; ">  <input type="submit" onclick="bing()" value="bing"></div>
@@ -760,17 +746,13 @@ if (currentUser) {
                 <div class="ui-block-d" style="border: 0px;float:none;display:inline-block; ">  <input type="submit" onclick="three360()" value="360"></div>
             </div><div style="clear:both"></div><br>
 
-
-
             <ul data-role="listview" data-inset="true" id="homeInfo"></ul>
-
             <div data-role="collapsible" data-collapsed="false">
                 <h4>最新</h4>
                 <ul data-role="listview" data-inset="false" id="homeList"></ul>
             </div>
             <button id="moreweb">更多站点</button>
         </div>
-
         <div data-role="footer" data-position="fixed">
             <div data-role="navbar">
                 <ul>
@@ -778,7 +760,6 @@ if (currentUser) {
                     <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
                     <li><a href="#home" data-icon="home">网站</a></li>
                     <li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
-
                     <li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
                 </ul>
             </div>
@@ -794,16 +775,14 @@ if (currentUser) {
     <!--结果页-->
     <div data-role="page" id="result">
         <div data-role="header" data-position="fixed">
-            <h1>程序员小站</h1>
+            <h1>今明书签</h1>
             <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
                 <a href="#add" data-role="button" data-icon="plus">分享网站</a>
                 <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
                 <a href="#registerpage" data-role="button" data-icon="forward">注册</a>
                 <a href="#loginpage" data-role="button" data-icon="star">登陆</a>
-
             </div>
         </div>
-
         <div data-role="content">
             <h2></h2>
             <ul data-role="listview" data-inset="true" id="resultInfo"></ul>
@@ -816,9 +795,7 @@ if (currentUser) {
                     <li><button data-icon="arrow-r" id="lastPage">末页</button></li>
                 </ul>
             </div>
-
         </div>
-
         <div data-role="footer" data-position="fixed">
             <div data-role="navbar">
                 <ul>
@@ -826,7 +803,6 @@ if (currentUser) {
                     <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
                     <li><a href="#home" data-icon="home">网站</a></li>
                     <li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
-
                     <li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
                 </ul>
             </div>
@@ -858,17 +834,15 @@ if (currentUser) {
 				}
 			});
     </script>
-
     <!--页-->
     <div data-role="page" id="addarticle">
         <div data-role="header" data-position="fixed">
-            <h1>程序员小站</h1>
+            <h1>今明书签</h1>
             <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
                 <a href="#add" data-role="button" data-icon="plus">分享网站</a>
                 <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
                 <a href="#registerpage" data-role="button" data-icon="forward">注册</a>
                 <a href="#loginpage" data-role="button" data-icon="star">登陆</a>
-
             </div>
         </div>
         <div data-role="content">
@@ -898,13 +872,10 @@ if (currentUser) {
             <div data-role="fieldcontain">
                 <fieldset data-role="controlgroup" data-type="horizontal">
                     <legend>语言:</legend>
-
                     <input type="radio" name="favoritecolor" id="favoritecolora1" value="经济">
                     <label for="favoritecolora1">经济</label>
-
                     <input type="radio" name="favoritecolor" id="favoritecolora2" value="文化">
                     <label for="favoritecolora2">文化</label>
-
                     <input type="radio" name="favoritecolor" id="favoritecolora3" value="体育">
                     <label for="favoritecolora3">体育</label>
                     <input type="radio" name="favoritecolor" id="favoritecolora4" value="健身">
@@ -923,10 +894,8 @@ if (currentUser) {
                     <label for="favoritecolora10">美食</label>
                     <input type="radio" name="favoritecolor" id="favoritecolora11" value="旅游">
                     <label for="favoritecolora11">旅游</label>
-
                 </fieldset>
             </div>
-
             <button id="addarticlebtn">添加文章</button>
         </div>
         <div data-role="footer" data-position="fixed">
@@ -936,7 +905,6 @@ if (currentUser) {
                     <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
                     <li><a href="#home" data-icon="home">网站</a></li>
                     <li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
-
                     <li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
                 </ul>
             </div>
@@ -948,18 +916,15 @@ if (currentUser) {
 				bmobTool.addarticle();
 			});
     </script>
-
     <!--搜索页-->
-
     <div data-role="page" id="add">
         <div data-role="header" data-position="fixed">
-            <h1>程序员小站</h1>
+            <h1>今明书签</h1>
             <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
                 <a href="#add" data-role="button" data-icon="plus">分享网站</a>
                 <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
                 <a href="#registerpage" data-role="button" data-icon="forward">注册</a>
                 <a href="#loginpage" data-role="button" data-icon="star">登陆</a>
-
             </div>
         </div>
         <div data-role="content">
@@ -1014,7 +979,6 @@ if (currentUser) {
                     <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
                     <li><a href="#home" data-icon="home">网站</a></li>
                     <li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
-
                     <li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
                 </ul>
             </div>
@@ -1027,28 +991,23 @@ if (currentUser) {
     </script>
     <div data-role="page" id="search">
         <div data-role="header" data-position="fixed">
-            <h1>程序员小站</h1>
+            <h1>今明书签</h1>
             <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
                 <a href="#add" data-role="button" data-icon="plus">分享网站</a>
                 <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
                 <a href="#registerpage" data-role="button" data-icon="forward">注册</a>
                 <a href="#loginpage" data-role="button" data-icon="star">登陆</a>
-
             </div>
         </div>
-
         <div data-role="content">
-
             <div data-role="fieldcontain">
                 <label for="search-name">名称：</label>
                 <input type="text" name="search-name" id="search-name">
             </div>
-
             <div data-role="fieldcontain">
                 <label for="search-keyword">关键词：</label>
                 <input type="text" name="search-keyword" id="search-keyword">
             </div>
-
             <div data-role="fieldcontain">
                 <fieldset data-role="controlgroup" data-type="horizontal">
                     <legend>类型：</legend>
@@ -1058,11 +1017,8 @@ if (currentUser) {
                     <input type="checkbox" name="search-type" id="search-blog" value="blog">
                 </fieldset>
             </div>
-
             <button id="searchweb">搜索</button>
-
         </div>
-
         <div data-role="footer" data-position="fixed">
             <div data-role="navbar">
                 <ul>
@@ -1070,7 +1026,6 @@ if (currentUser) {
                     <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
                     <li><a href="#home" data-icon="home">网站</a></li>
                     <li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
-
                     <li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
                 </ul>
             </div>
@@ -1087,21 +1042,17 @@ if (currentUser) {
 				bmobTool.findweb();
 			});
     </script>
-
     <!--关于-->
-
     <div data-role="page" id="about">
         <div data-role="header" data-position="fixed">
-            <h1>程序员小站</h1>
+            <h1>今明书签</h1>
             <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
                 <a href="#add" data-role="button" data-icon="plus">分享网站</a>
                 <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
                 <a href="#registerpage" data-role="button" data-icon="forward">注册</a>
                 <a href="#loginpage" data-role="button" data-icon="star">登陆</a>
-
             </div>
         </div>
-
         <div data-role="content">
             <ul data-role="listview">
                 <li><a href="http://tieba.baidu.com/f?ie=utf-8&kw=%E7%A8%8B%E5%BA%8F%E5%91%98">程序员吧</a></li>
@@ -1130,7 +1081,6 @@ if (currentUser) {
             </div>
             <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
         </div>
-
         <div data-role="footer" data-position="fixed">
             <div data-role="navbar">
                 <ul>
@@ -1138,7 +1088,6 @@ if (currentUser) {
                     <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
                     <li><a href="#home" data-icon="home">网站</a></li>
                     <li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
-
                     <li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
                 </ul>
             </div>
@@ -1146,16 +1095,14 @@ if (currentUser) {
     </div>
     <div data-role="page" id="doconline">
         <div data-role="header" data-position="fixed">
-            <h1>程序员小站</h1>
+            <h1>今明书签</h1>
             <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
                 <a href="#add" data-role="button" data-icon="plus">分享网站</a>
                 <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
                 <a href="#registerpage" data-role="button" data-icon="forward">注册</a>
                 <a href="#loginpage" data-role="button" data-icon="star">登陆</a>
-
             </div>
         </div>
-
         <div data-role="content">
             <a href="http://docs.oracle.com/javase/8/docs/api/" data-role="button">java</a>
             <a href="http://www.cplusplus.com/reference/" data-role="button" ">c++</a>
@@ -1167,7 +1114,6 @@ if (currentUser) {
             <a href="http://www.w3schools.com/sql/default.asp" data-role="button">SQL</a>
             <a href="https://secure.php.net/manual/en/index.php" data-role="button">PHP</a>
         </div>
-
         <div data-role="footer" data-position="fixed">
             <div data-role="navbar">
                 <ul>
@@ -1175,7 +1121,6 @@ if (currentUser) {
                     <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
                     <li><a href="#home" data-icon="home">网站</a></li>
                     <li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
-
                     <li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
                 </ul>
             </div>
@@ -1183,17 +1128,15 @@ if (currentUser) {
     </div>
     <div data-role="page" id="speech">
         <div data-role="header" data-position="fixed">
-            <h1>程序员小站</h1>
+            <h1>今明书签</h1>
             <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
                 <a href="#add" data-role="button" data-icon="plus">分享网站</a>
                 <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
                 <a href="#registerpage" data-role="button" data-icon="forward">注册</a>
                 <a href="#loginpage" data-role="button" data-icon="star">登陆</a>
-
             </div>
         </div>
         <div data-role="content">
-
             <ul data-role="listview">
                 <li><a href="http://gisdaodao.github.io/itsites/lecture/20151024扎克伯格清华中文演讲.html">20151024扎克伯格清华中文演讲</a></li>
                 <li><a href="http://gisdaodao.github.io/itsites/lecture/20150518库克在美国乔治华盛顿大学发表了演讲.html">20150518库克在美国乔治华盛顿大学发表了演讲</a></li>
@@ -1201,7 +1144,6 @@ if (currentUser) {
                 <li><a href="#articlelit" data-icon="info" data-transition="slide">文章列表</a></li>
             </ul>
         </div>
-
         <div data-role="footer" data-position="fixed">
             <div data-role="navbar">
                 <ul>
@@ -1209,7 +1151,6 @@ if (currentUser) {
                     <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
                     <li><a href="#home" data-icon="home">网站</a></li>
                     <li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
-
                     <li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
                 </ul>
             </div>
@@ -1217,13 +1158,12 @@ if (currentUser) {
     </div>
     <div data-role="page" id="articlelit">
         <div data-role="header" data-position="fixed">
-            <h1>程序员小站</h1>
+            <h1>今明书签</h1>
             <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
                 <a href="#add" data-role="button" data-icon="plus">分享网站</a>
                 <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
                 <a href="#registerpage" data-role="button" data-icon="forward">注册</a>
                 <a href="#loginpage" data-role="button" data-icon="star">登陆</a>
-
             </div>
         </div>
         <div data-role="content">
@@ -1236,7 +1176,6 @@ if (currentUser) {
             <div data-role="collapsible">
                 <h5>语言</h5>
                 <fieldset data-role="controlgroup" data-type="horizontal" id="favoritecolor1">
-
                     <input type="radio" name="favoritecolor1" id="favoritecolora1" value="历史">
                     <label for="favoritecolora1">历史</label>
                     <input type="radio" name="favoritecolor1" id="favoritecolora2" value="文化">
@@ -1259,7 +1198,6 @@ if (currentUser) {
                     <label for="favoritecolora10">科技</label>
                     <input type="radio" name="favoritecolor1" id="favoritecolora11" value="日记">
                     <label for="favoritecolora11">日记</label>
-
                 </fieldset>
             </div>
             <ul data-role="listview" data-inset="true" id="articleList"></ul>
@@ -1271,7 +1209,6 @@ if (currentUser) {
                     <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
                     <li><a href="#home" data-icon="home">网站</a></li>
                     <li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
-
                     <li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
                 </ul>
             </div>
@@ -1309,13 +1246,12 @@ if (currentUser) {
     </script>
     <div data-role="page" id="loginpage">
         <div data-role="header" data-position="fixed">
-            <h1>程序员小站-登录</h1>
+            <h1>今明书签-登录</h1>
             <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
                 <a href="#add" data-role="button" data-icon="plus">分享网站</a>
                 <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
                 <a href="#registerpage" data-role="button" data-icon="forward">注册</a>
                 <a href="#loginpage" data-role="button" data-icon="star">登陆</a>
-
             </div>
         </div>
         <div data-role="content">
@@ -1323,13 +1259,11 @@ if (currentUser) {
                 <label for="user-loginname">用户名：</label>
                 <input type="text" name="user-loginname" id="user-loginname">
             </div>
-
             <div data-role="fieldcontain">
                 <label for="user-loginpasswordword">密码：</label>
                 <input type="text" name="user-loginpasswordword" id="user-loginpasswordword">
             </div>
             <button id="loginbtn" onclick="Login()">登录</button>
-
             <div class="ui-grid-c">
                 <div class="ui-block-a"> <input type="button" value="收藏的文章" onclick=""></input>	 </div>
                 <div class="ui-block-b">  <input type="button" value="分享/发表的文章" onclick=""></input>	 </div>
@@ -1337,9 +1271,7 @@ if (currentUser) {
                 <div class="ui-block-d">  <input type="button" value="收藏/创建的网站" onclick=""></input>	 </div>
             </div>
             <ul data-role="listview" data-inset="true" id="shoucangarticleList"></ul>
-
         </div>
-
         <div data-role="footer" data-position="fixed">
             <div data-role="navbar">
                 <ul>
@@ -1347,7 +1279,6 @@ if (currentUser) {
                     <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
                     <li><a href="#home" data-icon="home">网站</a></li>
                     <li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
-
                     <li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
                 </ul>
             </div>
@@ -1382,13 +1313,12 @@ Bmob.User.logIn(username,password, {
     </script>
     <div data-role="page" id="registerpage">
         <div data-role="header" data-position="fixed">
-            <h1>程序员小站-注册</h1>
+            <h1>今明书签-注册</h1>
             <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
                 <a href="#add" data-role="button" data-icon="plus">分享网站</a>
                 <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
                 <a href="#registerpage" data-role="button" data-icon="forward">注册</a>
                 <a href="#loginpage" data-role="button" data-icon="star">登陆</a>
-
             </div>
         </div>
         <div data-role="content">
@@ -1396,7 +1326,6 @@ Bmob.User.logIn(username,password, {
                 <label for="user-registername">用户名：</label>
                 <input type="text" name="user-registername" id="user-registername">
             </div>
-
             <div data-role="fieldcontain">
                 <label for="user-registerkeyword">密码：</label>
                 <input type="text" name="user-registerpasswordword" id="user-registerpasswordword">
@@ -1404,7 +1333,6 @@ Bmob.User.logIn(username,password, {
             <input type="button" id="registerbtn" value="注册" onclick="Register()"></input>
 
         </div>
-
         <div data-role="footer" data-position="fixed">
             <div data-role="navbar">
                 <ul>
@@ -1412,13 +1340,11 @@ Bmob.User.logIn(username,password, {
                     <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
                     <li><a href="#home" data-icon="home">网站</a></li>
                     <li><a href="#doconline" data-icon="info" data-transition="slide">在线文档</a></li>
-
                     <li><a href="#about" data-icon="info" data-transition="slide">这人多</a></li>
                 </ul>
             </div>
         </div>
     </div>
-
     <script>
 	function Register(){
 	Bmob.initialize("1f570053c58338812a8970abbbaaa623", "d803ea3828a42eba94ecbc9ea47d435a");
@@ -1441,6 +1367,5 @@ user.signUp(null, {
 
 var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256749878'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1256749878' type='text/javascript'%3E%3C/script%3E"));
     </script>
-
 </body>
 </html>
