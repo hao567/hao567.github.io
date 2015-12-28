@@ -98,7 +98,7 @@ if (currentUser) {
 				o.listmessage=function(){
 					 	Bmob.initialize("1f570053c58338812a8970abbbaaa623", "d803ea3828a42eba94ecbc9ea47d435a");
 			        var talkinfolist=Bmob.Object.extend("talkmessagelist");
-					    var findquery = new Bmob.Query(textlist);
+					    var findquery = new Bmob.Query(talkinfolist);
 					    	findquery.descending("createdAt");
 					    findquery.find({
 					        success: function (results) {
@@ -137,7 +137,7 @@ if (currentUser) {
     <!--首页-->
     <div data-role="page" id="frequentlyuusedsites">
         <div data-role="header" data-position="fixed">
-            <h1>程序员小站</h1>
+            <h1>talk</h1>
             <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
                 <a href="#add" data-role="button" data-icon="plus">分享网站</a>
                 <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
