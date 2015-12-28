@@ -1,1 +1,196 @@
-wait fort talk
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="baidu-site-verification" content="XhxLn5rr0E" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="Keywords" content="程序员小站, 程序员网址导航,编程网站" />
+    <!--请不要拿走或者抄袭我们的创意,如果你需要，,我们可以把这个小站卖给你,如果想借鉴，请付点咨询费<link rel="stylesheet" href="./include/jquery.mobile-1.4.5.min.css" />
+    <script src="./include/jquery-1.8.3.min.js"></script>
+    <script src="./include/jquery.mobile-1.4.5.min.js"></script>
+    <script src="./include/bmob-min.js"></script>-->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="http://gisdaodao.github.io/itsites/bmob-min.js"></script>
+     <script>
+			var bmobTool=(function(){
+				Bmob.initialize("1f570053c58338812a8970abbbaaa623", "d803ea3828a42eba94ecbc9ea47d435a");
+			        var talkinfolist=Bmob.Object.extend("talkmessagelist");
+				var o={};
+				var lock=false,update=0,total=0;
+				o.maxPage=0;//提交锁，更新时间，结果数，最大页数
+				o.page=0;//当前页数
+
+				(function(obj){
+					var limit={}
+					obj.setLimit=function(x){
+						//设定条件时清除结果更新时间，结果数，最大页数，当前页数
+						limit=x;
+						update=0;
+						total=0;
+						obj.maxPage=0;
+						obj.page=0;
+					}
+					obj.getLimit=function(x){
+						return limit;
+					}
+				})(o)//设定/获取限制条件函数
+				var buildItem=function(object){
+					var tmpli,tmpa,dom1,dom2;
+					tmpli=document.createElement("li");
+					tmpa=document.createElement("a");
+					$(tmpa).attr("href",object.get("url")||"javascript:void(0);");
+					$(tmpa).attr("target","_blank");
+					dom1=document.createElement("h2");
+					$(dom1).text(object.get("name")||"站点未知");
+					$(tmpa).append(dom1);
+					dom1=document.createElement("p");
+					dom2=document.createElement("b");
+					$(dom2).text("网址:"+object.get("url"));
+					//$(dom2).text("作者:"+object.get("author"));
+					$(dom1).append(dom2);
+					$(tmpa).append(dom1);
+					//$(tmpa).append("<br>");
+					dom1=document.createElement("p");
+					$(dom1).text("关键词:");
+					$(tmpa).append(dom1);
+					for(var i=0;i<object.get("keyword").length;i++){
+						dom2=document.createElement("a")
+						dom2.onclick=function(){return false};
+						$(dom2).text(object.get("keyword")[i]).attr({'class':"ui-li-count"}).css({"position":"static","padding":".2em .5em"});
+						$(dom1).append(dom2);
+						$(dom2).bind("click",(function(k){return function(e){
+							e.stopPropagation();
+							o.setLimit({"keyword":[k]});
+							o.findweb();
+						}})(object.get("keyword")[i]));
+					}
+						dom3=document.createElement("a");
+						dom3.onclick=function()
+						{
+								var currentUser = Bmob.User.current();
+if (currentUser) {
+    // do stuff with the user
+     var  userdata={};userdata.userid=currentUser.id;
+				      	userdata.contentname=object.get("name");
+				      	userdata.recordtype="4";
+					userdata.articleurl=object.get("url");
+				      var useraddarticle=new	userarticleorsite();
+				      	useraddarticle.save(userdata, {
+						success:function(){  alert("收藏成功");;lock=false;},
+						error:function(){homeInfo("收藏失败");lock=false;}
+					});
+} else {
+   alert("请先登录");
+}
+						};
+						$(dom3).text("收藏");
+						$(dom1).append(dom3);;
+					dom1=document.createElement("p");
+					//$(dom1).attr("class","ui-li-aside");
+					$(dom1).text(object.updatedAt);
+					$(tmpa).append(dom1);
+					$(tmpli).append(tmpa);
+					return tmpli;
+				};//生成条目对象
+				o.listmessage=function(){
+					 	Bmob.initialize("1f570053c58338812a8970abbbaaa623", "d803ea3828a42eba94ecbc9ea47d435a");
+			        var talkinfolist=Bmob.Object.extend("talkmessagelist");
+					    var findquery = new Bmob.Query(textlist);
+					    	findquery.descending("createdAt");
+					    findquery.find({
+					        success: function (results) {
+					            for (i = 0; i < results.length; i++) {
+					                var tmpli, tmpa, dom1, dom2;
+					                tmpli = document.createElement("li");
+					                dom1 = document.createElement("h3");
+					                  $(dom1).addClass("wrap");
+					                $(dom1).text(results[i].get("text"));
+					                $(tmpli).append(dom1);
+					                $("#messagelist").append(tmpli);
+					                $("#messagelist").listview("refresh");
+					            }
+					        },
+					        error: function (error) {
+					           
+					        }
+					    });
+					}
+					o.addTextmessage=function(str){
+		var alltextmessage=Bmob.Object.extend("talkmessagelist");
+			        	var data={};
+			        		data.text=$("#addinfo").val();
+			        		data.type=$("input[type='radio'][name='kind']:checked").val()||"";
+			        		var textmessag=new alltextmessage();
+			        		textmessag.save(data, {
+					success:function(){alert("发表成功");lock=false;},
+						error:function(){alert("发表失败");lock=false;}
+					});
+					}
+				</script>
+    <title>程序员小站</title>
+</head>
+<body>
+
+    <!--首页-->
+    <div data-role="page" id="frequentlyuusedsites">
+        <div data-role="header" data-position="fixed">
+            <h1>程序员小站</h1>
+            <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+                <a href="#add" data-role="button" data-icon="plus">分享网站</a>
+                <a href="#addarticle" data-icon="plus" data-role="button">分享文章</a>
+                <a href="#registerpage" data-role="button" data-icon="forward">注册</a>
+                <a href="#loginpage" data-role="button" data-icon="star">登陆</a>
+            </div>
+        </div>
+        <div data-role="content">
+            <div data-role="fieldcontain">
+                <textarea name="addinfo" id="addinfo"></textarea>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend>类型:</legend>
+                    <label for="code">反馈</label>
+                    <input type="radio" name="kind" id="code" value="代码">
+                    <label for="other">其他</label>
+                    <input type="radio" name="kind" id="other" value="其他">
+                    <label for="tihui">体会</label>
+                    <input type="radio" name="kind" id="tihui" value="体会">
+                     <label for="jiaoyou">交友</label>
+                    <input type="radio" name="kind" id="jiaoyou" value="交友">
+                     <label for="jiaohuan">交换</label>
+                    <input type="radio" name="kind" id="jiaohuan" value="交换">
+                     <label for="gonggaoban">公告板</label>
+                    <input type="radio" name="kind" id="gonggaoban" value="公告板">
+                       <label for="duanzi">段子</label>
+                    <input type="radio" name="kind" id="duanzi" value="段子">
+                     <label for="biaobai">表白墙 </label>
+                    <input type="radio" name="kind" id="biaobai" value="表白墙">
+                </fieldset>
+                <button id="sendmessage">速记/发表</button>
+                <ul data-role="listview" data-inset="true" id="messagelist"></ul>
+                </div>
+          
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#frequentlyuusedsites" data-icon="home">常用</a></li>
+                    <li><a href="#articlelit" data-icon="info" data-transition="slide">文章</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).on("pageinit", "#frequentlyuusedsites", function () {
+           
+            bmobTool.listmessage();
+        
+        });
+        $("#sendmessage").bind("click",function(){
+
+				bmobTool.addTextmessage();
+			});
+    </script>
