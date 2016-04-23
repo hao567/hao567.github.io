@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <style type="text/css">
+        li {
+            display: block;
+            float: left;
+            width: 99px;
+            background-color: #34696f;
+            height: 66px;
+            margin-right: 10px;
+            align-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            vertical-align: central;
+        }
+
+        a {
+            text-align: center;
+            padding-top: 5px;
+            color: white;
+            align-content: center;
+            align-self: center;
+            display: block;
+            text-decoration: none;
+            vertical-align: central;
+        }
+    </style>
+    <script type="text/javascript">
+        function  setcolors(){
+            var nodes = document.getElementsByTagName("li");
+            for (var i = 0; i < nodes.length; i++) {
+                var j=   Math.random()*10;
+
+                var o = nodes[i];
+                o.style.backgroundColor = getRandomColor();
+            }
+        }
+        function getRandomColor() {
+            var c = '#';
+            var cArray = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+            for (var i = 0; i < 6; i++) {
+                var cIndex = Math.round(Math.random() * 15);
+                c += cArray[cIndex];
+            }
+            return c;
+        }
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <title></title>
+
+
+</head>
+<body onload="setcolors()">
+    <div data-role="page">
+        <ul data-role="listview">
+            <li><a href="http://www.harvard.edu/" target="_blank">Harvard University </a></li>
+            <li><a href="http://www.mit.edu/" target="_blank">Massachusetts Institute of Technology </a></li>
+            <li><a href="http://www.berkeley.edu/" target="_blank">University of California—Berkeley</a></li>
+            <li><a href="http://www.stanford.edu/" target="_blank">Stanford University</a></li>
+            <li><a href="http://www.ox.ac.uk/" target="_blank">University of Oxford</a></li>
+            <li><a href="http://www.cam.ac.uk/	" target="_blank">University of Cambridge</a></li>
+            <li><a href="http://www.caltech.edu/" target="_blank">California Institute of Technology</a></li>
+            <li><a href="http://www.ucla.edu/" target="_blank">University of California--Los Angeles</a></li>
+            <li><a href="http://www.columbia.edu/" target="_blank">Columbia University</a></li>
+            <li><a href="http://www.uchicago.edu/" target="_blank">University of Chicago</a></li>
+            <li><a href="http://www.washington.edu/" target="_blank">University of Washington</a></li>
+            <li><a href="https://www.jhu.edu/" target="_blank">Johns Hopkins University</a></li>
+            <li><a href="http://www.princeton.edu/main/" target="_blank">Princeton University</a></li>
+            <li><a href="http://www.upenn.edu/" target="_blank">University of Pennsylvania</a></li>
+            <li><a href="http://www.yale.edu/" target="_blank">Yale University</a></li>
+            <li><a href="http://www.utoronto.ca/" target="_blank">University of Toronto</a></li>
+            <li><a href="http://umich.edu/" target="_blank">University of Michigan</a></li>
+            <li><a href="http://www.imperial.ac.uk/" target="_blank">Imperial College London</a></li>
+            <li><a href="http://www.ucsd.edu/" target="_blank">University of California--San Diego</a></li>
+            <li><a href="https://duke.edu/" target="_blank">Duke University</a></li>
+            <li><a href="http://www.cornell.edu/" target="_blank">Cornell University</a></li>
+            <li><a href="http://www.ucl.ac.uk/" target="_blank">University College London</a></li>
+            <li><a href="https://www.ucsf.edu/" target="_blank">University of California--San Francisco</a></li>
+            <li><a href="http://www.ucsb.edu/" target="_blank">University of California--Santa Barbara</a></li>
+            <li><a href="http://www.northwestern.edu/" target="_blank">Northwestern University</a></li>
+            <li><a href="http://www.wisc.edu/" target="_blank">University of Wisconsin—Madison</a></li>
+            <li><a href="https://www.arch.ethz.ch/" target="_blank">Swiss Federal Institute of Technology Zurich</a></li>
+            <li><a href="https://www.ncsu.edu/" target="_blank">University of North Carolina--Chapel Hill</a></li>
+            <li><a href="http://twin-cities.umn.edu/" target="_blank">University of Minnesota--Twin Cities</a></li>
+            <li><a href="http://www.utexas.edu/" target="_blank">University of Texas—AustinCruz</a></li>
+    
+            
+        </ul>
+    </div>
+</body>
+</html>
