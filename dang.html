@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <style type="text/css">
+        li {display:block ; line-height:66px; float:left; width:66px; background-color:#34696f;height:66px;margin-right:10px;align-content:center;align-items:center;margin-bottom:10px;vertical-align:central}
+       a {text-align:center;padding-top:5px;  color: white; target:view_window; line-height:56px;height:56px; align-content:center;align-self:center;display: block;text-decoration:  none;vertical-align:central }
+    </style>
+    <script type="text/javascript">
+        function  setcolors(){
+            var nodes = document.getElementsByTagName("li");
+            for (var i = 0; i < nodes.length; i++) {
+                var j=   Math.random()*10;
+                var o = nodes[i];
+                o.style.backgroundColor = getRandomColor();
+            }
+        }
+        function getRandomColor() {
+            var c = '#';
+            var cArray = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+            for (var i = 0; i < 6; i++) {
+                var cIndex = Math.round(Math.random() * 15);
+                c += cArray[cIndex];
+            }
+            return c;
+        }
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <title></title>
+
+
+
+</head>
+<body onload="setcolors()">
+    <div data-role="page">
+        <ul data-role="listview">
+            <li><a href="http://m.chinanews.com/">中国新闻网</a></li>
+           
+        </ul>
+    </div>
+</body>
+</html>
