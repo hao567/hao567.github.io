@@ -9,8 +9,25 @@
     <video id="video" autoplay="" style='width:640px;height:480px'></video>
     <div><button id='picture' style="width: 100%;">PICTURE</button></div>
     <canvas id="canvas" width="640" height="480"></canvas>
+    <script src="/bmob-min.js"></script>
     <script type="text/javascript">
+    (function hh()
+        {
+            Bmob.initialize("eaec07b2bad6f78ce206c03338a260d7", "2c49df0631729737c2778abdb1441441");
+            var annimal = Bmob.Object.extend("annimal");
+            var gameScore = new annimal();
+            gameScore.set("kind", "dog");
+            gameScore.save(null, {
+                success: function (object) {
+                    alert("create object success, object id:" + object.id);
+                },
+                error: function (model, error) {
+                    alert("create object fail");
+                }
+            });
+        });
         var x = document.getElementById("geodiv");
+
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition);
