@@ -11,7 +11,7 @@
     <canvas id="canvas" width="640" height="480"></canvas>
     <script src="/js/bmob-min.js"></script>
     <script type="text/javascript">
-    (function hh()
+    function hh()
         {
             Bmob.initialize("eaec07b2bad6f78ce206c03338a260d7", "2c49df0631729737c2778abdb1441441");
             var annimal = Bmob.Object.extend("annimal");
@@ -25,7 +25,7 @@
                     alert("create object fail");
                 }
             });
-        });
+        };
         var x = document.getElementById("geodiv");
 
         function getLocation() {
@@ -58,6 +58,7 @@ if (navigator.getUserMedia) { // 标准的API
 document.getElementById("picture").addEventListener("click", function () {
     context.drawImage(video, 0, 0, 640, 480);
 });
+hh();
     </script>
 
 </body>
