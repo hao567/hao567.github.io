@@ -5,11 +5,21 @@
     <title>Insert title here</title>
 </head>
 <body>
+    <div id="geodiv"></div>
     <video id="video" autoplay="" style='width:640px;height:480px'></video>
     <div><button id='picture' style="width: 100%;">PICTURE</button></div>
     <canvas id="canvas" width="640" height="480"></canvas>
     <script type="text/javascript">
-
+        var x = document.getElementById("geodiv");
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else { x.innerHTML = "浏览器不支持定位，请换一个"; }
+        }
+        function showPosition(position) {
+            x.innerHTML = "经度: " + position.coords.latitude +
+            "<br />纬度: " + position.coords.longitude;
+        }
 var video = document.getElementById("video");
 var context = canvas.getContext("2d");
 var errocb = function () {
