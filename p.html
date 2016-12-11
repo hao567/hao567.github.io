@@ -1,14 +1,47 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Insert title here</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <title></title>
 </head>
 <body>
-    <div id="geodiv">定位信息</div>
-    <video id="video" autoplay="" style='width:640px;height:480px'></video>
-    <div><button id='picture' style="width: 100%;">PICTURE</button></div>
-    <canvas id="canvas" width="640" height="480"></canvas>
+    <div class="container">
+        <div class="row">
+            <video id="video" autoplay="" style=''></video>
+        </div>
+        <div class="row">
+           <button id='picture' type="button" class="btn btn-primary">拍照</button>           
+        </div>       
+        <div class="row">
+            <form role="form">
+                <canvas id="canvas" name="picture"></canvas>
+                <div class="form-group">
+                    <label for="description">描述</label>
+                    <input type="text" class="form-control" id="description" name="description" placeholder="描述">
+                </div>
+                <div id="geodiv" name="geoinfo" class="form-group">
+                    坐标
+                </div>
+                <div class="form-group">
+                    <label for="address">详细地址</label>
+                    <input type="text" class="form-control" id="address" name="address" placeholder="详细地址">
+                </div>              
+                <button type="submit" class="btn btn-default">提交</button>
+            </form>
+        </div>
+       
+    </div> 
     <script src="/js/bmob-min.js"></script>
     <script type="text/javascript">
     function hh()
@@ -59,8 +92,8 @@ document.getElementById("picture").addEventListener("click", function () {
     context.drawImage(video, 0, 0, 640, 480);
 });
 //hh();
-getLocation();
+//getLocation();
     </script>
-
+   
 </body>
 </html>  
