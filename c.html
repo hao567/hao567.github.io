@@ -32,7 +32,7 @@
                 console.log(privateliststr);
                 var ListProperty = Firstchar + leftcharlist+"List";
                 console.log(Upperchar);
-                var resultlist = " <br> private List\< string\> " + privateliststr + "=new List\< string\>();" + "<br>" + "public string " + ListProperty + " {  <br> get { return " + privateliststr + "; }  " + "<br>" + "     set   {      " + privateliststr + "= value; " + " RaisePropertyChanged(" + ListProperty + ");    }        <br> }";
+                var resultlist = " <br> private List\< string\> " + privateliststr + "=new List\< string\>();" + "<br>" + "public string " + ListProperty + " {  <br> get { return " + privateliststr + "; }  " + "<br>" + "     set   {      " + privateliststr + "= value; " + " RaisePropertyChanged(\"" + ListProperty + "\");    }        <br> }";
                 $("#propertyP").html(result+resultlist)
             });
         });
