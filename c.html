@@ -32,7 +32,48 @@
                 console.log(privateliststr);
                 var ListProperty = Firstchar + leftcharlist+"List";
                 console.log(Upperchar);
-                var resultlist =  " <br> private string " + privateliststr + "= string.Empty;" + "<br>" + "public string " + ListProperty + " {  <br> get { return " + privateliststr + "; }  " + "<br>" + "     set   {      " + privateliststr + "= value; " + " RaisePropertyChanged(" + ListProperty + ");    }        <br> }";
+                var resultlist = " <br> private List<string> " + privateliststr + "new List<string>();" + "<br>" + "public string " + ListProperty + " {  <br> get { return " + privateliststr + "; }  " + "<br>" + "     set   {      " + privateliststr + "= value; " + " RaisePropertyChanged(" + ListProperty + ");    }        <br> }";
+                $("#propertyP").html(result+resultlist)
+            });
+        });
+    </script>
+   
+</body>
+</html><!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="http://static.runoob.com/assets/jquery/2.0.3/jquery.min.js"></script>
+</head>
+<body>
+    <input  id="c"/>
+    <input type="button" id="generate" value="生成c#属性" />
+    <p id="propertyP">
+
+    </p>
+    <script>
+        $(document).ready(function () {
+            
+          
+            $("#generate").click(function () {
+                var c = $("#c").val();
+                console.log(c);
+             
+                var Firstchar = c.charAt(0).toUpperCase();
+                var leftcharlist = c.substr(1, c.length - 1);
+                var privatestr = "_" + c;
+                console.log(privatestr);
+                var Upperchar = Firstchar + leftcharlist;
+                console.log(Upperchar);
+                var result = " private string _" + c + "= string.Empty;" + "<br>" + "public string " + Upperchar + " {  <br> get { return " + privatestr + "; }  " + "<br>" + "     set   {      " + privatestr + "= value; " + " RaisePropertyChanged(" + Upperchar + ");    }        <br> }";
+               
+                var privateliststr = "_" + c+"list";
+                console.log(privateliststr);
+                var ListProperty = Firstchar + leftcharlist+"List";
+                console.log(Upperchar);
+                var resultlist = " <br> private List<string> " + privateliststr + "new List<string>();" + "<br>" + "public string " + ListProperty + " {  <br> get { return " + privateliststr + "; }  " + "<br>" + "     set   {      " + privateliststr + "= value; " + " RaisePropertyChanged(" + ListProperty + ");    }        <br> }";
                 $("#propertyP").html(result+resultlist)
             });
         });
