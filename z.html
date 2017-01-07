@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Multi-page template</title>
+	<link rel="stylesheet" href="http://demos.jquerymobile.com/1.4.1/css/themes/default/jquery.mobile-1.4.1.min.css">
+	<link rel="stylesheet" href="http://demos.jquerymobile.com/1.4.1/_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="http://demos.jquerymobile.com/1.4.1/favicon.ico">
+	<script src="http://demos.jquerymobile.com/1.4.1/js/jquery.js"></script>
+	<script src="http://demos.jquerymobile.com/1.4.1/_assets/js/index.js"></script>
+	<script src="http://demos.jquerymobile.com/1.4.1/js/jquery.mobile-1.4.1.min.js"></script>
+    <script src="C:/stockchina/stockfighter/bmob-min.js"></script>
+   
+
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/git/jquery.mobile-git.css" />
+    <link rel="stylesheet" href="https://rawgithub.com/arschmitz/jquery-mobile-datepicker-wrapper/master/jquery.mobile.datepicker.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="https://rawgithub.com/jquery/jquery-ui/1-10-stable/ui/jquery.ui.datepicker.js"></script>
+    <script src="http://code.jquery.com/mobile/git/jquery.mobile-git.js"></script>
+    <script src="https://rawgithub.com/arschmitz/jquery-mobile-datepicker-wrapper/master/jquery.mobile.datepicker.js"></script>
+</head>
+
+<body>
+
+<div data-role="page">
+
+	<!-- /header -->
+
+	<div role="main" class="ui-content">
+        <div>
+            <input type="text" data-role="date" id="dateic" data-inline="false">
+            <input type="submit" value="日期查询" id="querybtn">
+        </div>
+        <div>
+            <input type="text"  id="codeinput">
+            <input type="submit" value="代码查询包含sh或者sz" id="codeSubmit">
+        </div>
+		<ul data-role="listview" id="list"  data-inset="true">
+  
+       </ul>
+	</div><!-- /content -->
+  
+	<script type="text/javascript">
+        Bmob.initialize("ef0541162c33a8b1a684b65196eb9040", "3b7f79875bf2d30a484dec209015bd79");
+                $(document).ready(function(){
+                    $("#querybtn").click(function () {
+                        var datestr = $("#dateic").val();
+                        console.log(datestr);
+                        var array = datestr.split('/');
+                        console.log(array);
+                        var m;
+                        var day;
+                        var index = array[0].indexOf('0');
+                        if (index == 0) {
+                            //以'abc'开头
+                            m = array[0].substr(1, 1);
+                        }
+                        else
+                        {
+                            m = array[0];
+                        }
+                        var index2 = array[1].indexOf('0');
+                        if (index == 0) {
+                            //以'abc'开头
+                            day = array[1].substr(1, 1);
+                        }
+                        else {
+                            day = array[1]
+
+                        }
+                        var resdate = array[2] + "/" + m + "/" + day;
+                        var str1 = resdate + " 0:00:00";
+                        console.log(str1);
+                        var GameScore = Bmob.Object.extend("txzhangrank");
+    var query = new Bmob.Query(GameScore);
+    query.equalTo("datetime", str1);
+    // 查询所有数据
+    query.find({
+        success: function(results) {
+           // alert("共查询到 " + results.length + " 条记录");
+            // 循环处理查询到的数据
+            for (var i = 0; i < results.length; i++) {
+            var object = results[i];
+            console.log(object);
+            console.log(object.get('code'));
+            var resultstr = "<li>" + object.get('code') + "</li>";
+            $("#list").append(resultstr);
+            }
+        },
+        error: function(error) {
+            alert("查询失败: " + error.code + " " + error.message);
+        }
+    });
+
+                    });
+
+                    $("#codeSubmit").click(function () {
+                        var datestr = $("#codeinput").val();
+                        console.log(datestr);
+                        var GameScore = Bmob.Object.extend("txzhangrank");
+                        var query = new Bmob.Query(GameScore);
+                        query.equalTo("code", datestr);
+                        // 查询所有数据
+                        query.find({
+                            success: function (results) {
+                               alert("共查询到 " + results.length + " 条记录");
+                                // 循环处理查询到的数据
+                                for (var i = 0; i < results.length; i++) {
+                                    var object = results[i];
+                                    console.log(object);
+                                }
+                            },
+                            error: function (error) {
+                                alert("查询失败: " + error.code + " " + error.message);
+                            }
+                        });
+
+                    });
+        })
+
+    </script>
+
+</div><!-- /page -->
+
+</body>
+</html>
