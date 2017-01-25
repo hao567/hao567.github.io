@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>windows 系统下载大全</title>
+	<style>
+        .BFC {
+            zoom: 1;
+        }
+        .BFC:after{
+            content: "";
+            display: block;
+            clear: both;
+        }
+        body {
+            background-color: #00AAFF;
+            font-family: "微软雅黑";
+        }
+        #root_div {
+            width: 1080px;
+            margin: 0 auto;
+        }
+		#title {text-align: center; color: white;}
+        ul,ol {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        li {
+            float: left;
+			margin: 10px;
+        }
+		a{
+			text-decoration: none;
+		}
+		td a{
+			padding: 3px;
+			color: white;
+		}
+        
+        li:hover #xp_text {
+            line-height: 120px;
+        }
+		li:hover #win7 {
+			height: 230px;
+		}
+		li:hover #win8 {
+			height: 170px;
+		}
+		li:hover .system_name{
+			line-height: 30px;
+		}
+        .system_group {
+            display: block;
+            width: 250px;
+            height: 150px;
+            color: white;
+            text-align: center;
+            line-height: 30px;
+            overflow-y: hidden;
+        }
+		
+		
+		.version_label{
+			text-align: center;
+			float: left;
+			padding: 0 5px;
+			font-size: 16px;
+		}
+		.version_list{
+			display: block;
+			color: black;
+			overflow: auto;
+			font-size: 16px;
+			text-align: left;
+			line-height: 24px;
+		}
+		.version_name{
+			width: 154px;
+			text-align: center;
+		}
+		.system_name {
+            font-size: 20px;
+			line-height: 150px;
+			transition: line-height 500ms;
+		}
+		#system_download_list{
+			position: fixed;
+			top: 35%;
+		}
+
+		/* xp相关的样式 */
+		#xp_pro{
+			background-color: #0BD900;
+		}
+		#xp_text {
+            font-size: 20px;
+            line-height: 150px;
+            transition: line-height 500ms;
+        }
+        #xp_download_text {
+            background-color: black;
+            font-size: 16px;
+			opacity:0.45;
+        }
+		
+		/* win7相关的样式 */
+		#win7{
+			background-color: deepskyblue;
+			transition: height 500ms;
+		}
+		#win7_version_list{ height: 200px; background-color: aliceblue; }
+		#win7_version_list td a{background-color: deepskyblue;}
+
+		/* win8相关的样式 */
+		#win8{
+			background-color: #F0B129;
+			transition: height 500ms;
+		}
+		#win8 .version_label {background-color: #FFC02B;}
+		#win8 .version_list { height: 110px; background-color: #FFFEDB}
+		#win8 td a { background-color: #FAB500; }
+		#win8 #win8_label {
+			width: 45px;
+			background-color: #FFFEDB;
+			color: black;
+		}
+		#win81_label{
+			width: 55px;
+		}
+		#win81u_label{
+			width: 120px;
+		}
+		
+		/* win10相关的样式 */
+		#win10 {
+			background-color: deepskyblue;
+			transition: height 500ms;
+		}
+		#win10 td{
+			text-align: center;
+		}
+		#win10 td a{
+			background-color: deepskyblue;
+		}
+
+		#win10 .version_label{width: 73.333px; background-color: #30CFFF}
+		#win10 .version_list {
+			background-color: aliceblue;
+		}
+		#win10 #win10_1507_version_label{
+			background-color: aliceblue;
+			color: black;
+		}
+		#win10_1511_version_list{
+			height: 114px;
+		}
+		#page_bottom{
+			width: 100%;
+			height: 50px;
+			position: fixed;
+			left: 0px;
+			bottom: 0px;
+			background-color: #1E90FF;
+			color: white;
+			text-align: center;
+			font-size: 20px;
+			padding-top: 15px;
+		}
+		#page_bottom a{
+			color: white;
+			text-decoration: underline;
+		}
+		#data_source{
+			position: fixed;
+			top: 0px;
+			right: 0px;
+		}
+		#data_source_text{
+			font-size: 20px;
+			color: white;
+			text-align: center;
+			background-color: #FA8072;
+			padding: 10px 0px;
+		}
+		#data_source img {
+			width: 130px;
+		}
+		#better_version a {
+			margin: 0 5px;
+		}
+		.this_list_name{
+			width: 250px;
+			line-height: 20px;
+			font-size: 12px;
+			text-align: center;
+			opacity: 0.3;
+		}
+    </style>
+	<script>
+		function pageSwitch(pageRootID, thisLabelID, thisLabelColor, otherLabelColor, go_to_pageID) {
+			var pageRoot = document.getElementById(pageRootID);
+			var allLabel = pageRoot.getElementsByClassName("version_label");
+			var allVersionList = pageRoot.getElementsByClassName("version_list");
+
+			for (var i = 0; i < allLabel.length; i++) {
+				allLabel[i].style.background = otherLabelColor;
+				allLabel[i].style.color = "white";
+			}
+			for (var i = 0; i < allVersionList.length; i++) {
+				allVersionList[i].style.display = "none";
+			}
+
+			var thisLabel = document.getElementById(thisLabelID);
+			thisLabel.style.color = "black";
+			thisLabel.style.background = thisLabelColor;
+
+			document.getElementById(go_to_pageID).style.display = "block";
+		}
+
+		function open_box(boxID, go_to_height) {
+			document.getElementById(boxID).style.height = go_to_height;
+		}
+	</script>
+</head>
+
+<body>
+
+	<div id="root_div">
+		<h2 id="title">windows下载大全</h2>
+		<div id="data_source">
+			<div id="data_source_text">
+				数据源
+			</div>
+			<a href="http://itellyou.cn/" target="_blank">
+				<img src="http://itellyou.cn/images/itellyou.cn.png" alt="msdn,我告诉你" />
+			</a>
+		</div>
+		<ul id="system_download_list" class="BFC">
+			<li>
+				<a id="xp_pro" class="system_group" href="ed2k://|file|zh-hans_windows_xp_professional_with_service_pack_3_x86_cd_x14-80404.iso|630239232|CD0900AFA058ACB6345761969CBCBFF4|/">
+					<div id="xp_text">windows XP</div>
+					<div id="xp_download_text">点击下载Windows XP 专业版 sp3</div>
+				</a>
+			</li>
+			<li>
+				<div id="win7" class="system_group">
+					<div class="system_name">windows 7</div>
+					<table id="win7_version_list" class="version_list">
+						<tr id="starter">
+							<td class="version_name">入门版</td>
+							<td colspan="2">
+								<a href="ed2k://|file|cn_windows_7_starter_with_sp1_x86_dvd_u_678536.iso|2653276160|B0A788EA28B2491B4587A561A8CB5B19|/">
+                					32位
+                				</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="version_name">家庭普通版</td>
+							<td colspan="2">
+								<a href="ed2k://|file|cn_windows_7_home_basic_with_sp1_x86_dvd_u_676500.iso|2653276160|843E7A78F2126FAC726CF5342710082D|/">
+                					32位
+                				</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="version_name">家庭高级版</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_7_home_premium_with_sp1_x86_dvd_u_676770.iso|2653276160|A8E8BD4421174DF34BD14D60750B3CDB|/">
+                					32位
+                				</a>
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_7_home_premium_with_sp1_x64_dvd_u_676691.iso|3420557312|1A3CF44F3F5E0BE9BBC1A938706A3471|/">
+                					64位
+                				</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="version_name">专业版</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_7_professional_with_sp1_x86_dvd_u_677162.iso|2653276160|08F65018BD9B5BC8D77C1C7C5615A329|/">
+                					32位
+                				</a>
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_7_professional_with_sp1_x64_dvd_u_677031.iso|3420557312|430BEDC0F22FA18001F717F7AF08C9D5|/">
+                					64位
+                				</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="version_name">专业版（VL）</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_7_professional_with_sp1_vl_build_x86_dvd_u_677939.iso|2502909952|935E5B4B754527BE3C238FA6ABDD9B86|/">
+                					32位
+                				</a>
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_7_professional_with_sp1_vl_build_x64_dvd_u_677816.iso|3266004992|5A52F4CCEFA71797D58389B397038B2F|/">
+                					64位
+                				</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="version_name">旗舰版</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_7_ultimate_with_sp1_x86_dvd_u_677486.iso|2653276160|7503E4B9B8738DFCB95872445C72AEFB|/">
+                					32位
+                				</a>
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_7_ultimate_with_sp1_x64_dvd_u_677408.iso|3420557312|B58548681854236C7939003B583A8078|/">
+                					64位
+                				</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="version_name">企业版</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_7_enterprise_with_sp1_x86_dvd_u_677716.iso|2502856704|B3C25EA4DD88D7E54F22D3C3E78C410B|/">
+                					32位
+                				</a>
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_7_enterprise_with_sp1_x64_dvd_u_677685.iso|3265574912|E9DB2607EA3B3540F3FE2E388F8C53C4|/">
+                					64位
+                				</a>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</li>
+			<li>
+				<div id="win8" class="system_group">
+					<div class="system_name">windows 8/8.1</div>
+					<div id="win8_or_win81_version_label" class="BFC">
+						<div id="win8_label" class="version_label"
+						onmouseover="pageSwitch('win8','win8_label','#FFFEDB','#FFC02B','win8_version_list')">
+							win8
+						</div>
+						<div id="win81_label" class="version_label"
+						onmouseover="pageSwitch('win8','win81_label','#FFFEDB','#FFC02B','win81_version_list')">
+							win8.1
+						</div>
+						<div id="win81u_label" class="version_label"
+						onmouseover="pageSwitch('win8','win81u_label','#FFFEDB','#FFC02B','win81u_version_list')">
+							win8.1 update
+						</div>
+					</div>
+					<table id="win8_version_list" class="version_list">
+						<tr>
+							<td class="version_name">
+								普通/专业二合一版
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_8_x86_dvd_915414.iso|2679801856|9AF10141BFD61BC66D9D6459758D7749|/">
+									32位
+								</a>
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_8_x64_dvd_915407.iso|3652950016|5C7F8C212BD3A1827866563773A431C2|/">
+									64位
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="version_name">
+								专业版（VL）
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_8_pro_vl_x86_dvd_917720.iso|2595137536|E87CEF7B8B4EFB12B0A7397795209301|/">
+									32位
+								</a>
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_8_pro_vl_x64_dvd_917773.iso|3558014976|7956620A80428F37D4F2989CB5CF3B5A|/">
+									64位
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="version_name">
+								企业版
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_8_enterprise_x86_dvd_917682.iso|2597502976|7B6541942A16EB54BC81E84558DF09DF|/">
+									32位
+								</a>
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_8_enterprise_x64_dvd_917570.iso|3560837120|8CAE8064C4B8F9CD84941B4FF4A34722|/">
+									64位
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="this_list_name" colspan="3">win8系列</td>
+						</tr>
+					</table>
+					<table id="win81_version_list" class="version_list">
+						<tr>
+							<td class="version_name">
+								普通/专业二合一版
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_8_1_x86_dvd_2707405.iso|3055904768|B296A943F16FADFC5FFA2F1D583DCC49|/">
+									32位
+								</a>
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_8_1_x64_dvd_2707237.iso|4076017664|839CBE17F3CE8411E8206B92658A91FA|/">
+									64位
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="version_name">
+								专业版（VL）
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_8_1_pro_vl_x86_dvd_2972620.iso|3049981952|5B396C3A0BA99617647D9AFE8403AFA5|/">
+									32位
+								</a>
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_8_1_pro_vl_x64_dvd_2971907.iso|4032598016|1FDA520B3E8880E2FB00B20439E0826E|/">
+									64位
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="version_name">
+								企业版
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_8_1_enterprise_x86_dvd_2972257.iso|3050842112|6B60ABF8282F943FE92327463920FB67|/">
+									32位
+								</a>
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_8_1_enterprise_x64_dvd_2971863.iso|4039327744|08BAF18320B8FFC58D4C35BCC7A32012|/">
+									64位
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="this_list_name" colspan="3">win8.1系列</td>
+						</tr>
+					</table>
+					<table id="win81u_version_list" class="version_list">
+						<tr>
+							<td class="version_name">
+								普通/专业二合一版
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_8.1_with_update_x86_dvd_6051523.iso|3349960704|C1B8A61BD8F1300825BF03C4D31B35A0|/">
+									32位
+								</a>
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_8.1_with_update_x64_dvd_6051473.iso|4504475648|D66BEF759548656EDA981D902A957545|/">
+									64位
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="version_name">
+								专业版（VL）
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_8.1_pro_vl_with_update_x86_dvd_6050910.iso|3200301056|B078A986993B7EDD474FD09EB6FF7E1B|/">
+									32位
+								</a>
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_8.1_pro_vl_with_update_x64_dvd_6050873.iso|4317507584|B0888275B5BD40E67D3F178B84B9A874|/">
+									64位
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="version_name">
+								企业版
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_8.1_enterprise_with_update_x86_dvd_6050645.iso|3199901696|0209A1FDE82A5AC7A248B4CA3F860F2B|/">
+									32位
+								</a>
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_8.1_enterprise_with_update_x64_dvd_6050374.iso|4317065216|AC8215A13817CC0EC4EA42E5C92E88B7|/">
+									64位
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="this_list_name" colspan="3">win8.1 update系列</td>
+						</tr>
+					</table>
+				</div>
+			</li>
+			<li>
+				<div id="win10" class="system_group" onmouseout="open_box('win10','150px')">
+					<div class="system_name">windows 10</div>
+					<div id="win10_version_label" class="BFC">
+						<div id="win10_1507_version_label" class="version_label"
+						onmouseover="pageSwitch('win10','win10_1507_version_label','aliceblue','#30CFFF','win10_1507_version_list');
+							open_box('win10','177px')">
+							1507
+						</div>
+						<div id="win10_1511_version_label" class="version_label"
+						onmouseover="pageSwitch('win10','win10_1511_version_label','aliceblue','#30CFFF','win10_1511_version_list');
+							open_box('win10','147px')">
+							1511
+							</div>
+						<div id="win10_1607_version_label" class="version_label"
+						onmouseover="pageSwitch('win10','win10_1607_version_label','aliceblue','#30CFFF','win10_1607_version_list');
+							open_box('win10','177px')">
+							1607
+						</div>
+					</div>
+					<table id="win10_1507_version_list" class="version_list" onmouseover="open_box('win10','177px')">
+						<tr>
+							<td class="version_name">
+								家庭/专业二合一版
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_10_multiple_editions_x86_dvd_6846431.iso|3233482752|B5C706594F5DC697B2A098420C801112|/">
+									32位
+								</a>
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_10_multiple_editions_x64_dvd_6848463.iso|4303300608|94FD861E82458005A9CA8E617379856A|/">
+									64位
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="version_name">
+								教育版
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_10_education_x86_dvd_6847858.iso|3097344000|E65D0B95FC75EC17FA6E72DC7433B46F|/">
+									32位
+								</a>
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_10_education_x64_dvd_6847843.iso|4159854592|50A2126871A73D48FAE49D7D928D5343|/">
+									64位
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="version_name">
+								长期服务版
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_10_enterprise_2016_ltsb_x86_dvd_9057089.iso|2817034240|67C3865D03E765BDD4845BA2CB7649F8|/">
+									32位
+								</a>
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_10_enterprise_2016_ltsb_x64_dvd_9060409.iso|3821895680|FF17FF2D5919E3A560151BBC11C399D1|/">
+									64位
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="version_name">
+								企业版
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_10_enterprise_x86_dvd_6846962.iso|3100794880|B605D57635502A46B86ACC73764CCD9A|/">
+									32位
+								</a>
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_10_enterprise_x64_dvd_6846957.iso|4162242560|3F657E387CD65FE7BA69DACAAE0E3510|/">
+									64位
+								</a>
+							</td>
+						</tr>
+					</table>
+					<table id="win10_1511_version_list" class="version_list" onmouseover="open_box('win10','147px')">
+						<tr>
+							<td class="version_name">
+								家庭/专业二合一版
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_10_multiple_editions_version_1511_updated_apr_2016_x86_dvd_8712808.iso|3540477952|9F5C03A7B60E8292FA50A80F5FE57D34|/">
+									32位
+								</a>
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_10_multiple_editions_version_1511_updated_apr_2016_x64_dvd_8712460.iso|4668538880|C24CABC107DAB4956A947BA336A10DD9|/">
+									64位
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="version_name">
+								教育版
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_10_education_version_1511_updated_apr_2016_x86_dvd_8730220.iso|3337048064|0261C4B08BDB0FED8D383576F81D4583|/">
+									32位
+								</a>
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_10_education_version_1511_updated_apr_2016_x64_dvd_8713899.iso|4459569152|DFA89CE728141023DF81F36B9ABA817A|/">
+									64位
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="version_name">
+								企业版
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_10_enterprise_version_1511_updated_apr_2016_x86_dvd_8712610.iso|3327528960|CB0F13BF634C19ECB90C86AFACE43458|/">
+									32位
+								</a>
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_10_enterprise_version_1511_updated_apr_2016_x64_dvd_8710041.iso|4453720064|41F07B071685E4035206F0F986B8451D|/">
+									64位
+								</a>
+							</td>
+						</tr>
+					</table>
+					<table id="win10_1607_version_list" class="version_list" onmouseover="open_box('win10','177px')">
+						<tr>
+							<td class="version_name">
+								家庭/专业二合一版
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_10_multiple_editions_version_1607_updated_jul_2016_x86_dvd_9060050.iso|3275581440|006F76229DB61ADA1D8E49DD4A6A0A5D|/">
+									32位
+								</a>
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_10_multiple_editions_version_1607_updated_jan_2017_x64_dvd_9714394.iso|4747692032|27841B07666580185078EE62915191A1|/">
+									64位
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="version_name">
+								教育版
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_10_education_version_1607_updated_jul_2016_x86_dvd_9056381.iso|3103516672|BA95618BB3D14C0B91A7D6D2518DCCFC|/">
+									32位
+								</a>
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_10_education_version_1607_updated_jul_2016_x64_dvd_9056220.iso|4150953984|AD0737D5F182082C37E6D1DB7CCDBB77|/">
+									64位
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="version_name">
+								企业版
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_10_enterprise_version_1607_updated_jul_2016_x86_dvd_9059597.iso|3100624896|0E1580E308D316A8648B0BF58D5CDEE2|/">
+									32位
+								</a>
+							</td>
+							<td>
+								<a href="ed2k://|file|cn_windows_10_enterprise_version_1607_updated_jan_2017_x64_dvd_9714414.iso|4474976256|21E442B2D57E3F1C15C13DBE9F4A09AD|/">
+									64位
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td id="better_version" colspan="3">
+								<a href="https://www.microsoft.com/zh-cn/software-download/windows10iso/">
+									更多版本>
+								</a>
+								<a href="http://go.microsoft.com/fwlink/?LinkId=691209">
+									介质创建工具
+								</a>
+							</td>
+						</tr>
+					</table>
+					
+				</div>
+			</li>
+		</ul>
+		<div id="page_bottom">
+			请使用 
+			<a href="http://xl9.xunlei.com/" target="_blank">迅雷</a>
+			 进行下载
+			
+		</div>
+	</div>
+</body>
+
+</html>
